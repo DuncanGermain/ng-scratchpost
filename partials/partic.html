@@ -1,0 +1,10 @@
+<div ng-controller="ParticControl">
+	<div ng-show="true">
+		<p>Enter a code to join a session:</p>
+		<input type="text" ng-show="true" ng-model="sessID">
+		<p>{{sessID}}</p>
+		<button ng-click="joinSession()">Submit</button>
+	</div>
+	<p ng-show="saved">Session code: {{saved}}</p>
+	<pre ng-show="saved">{{session | json}}</pre>
+</div>

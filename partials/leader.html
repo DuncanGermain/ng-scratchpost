@@ -1,0 +1,10 @@
+<div ng-controller="LeaderControl">
+	<div ng-show="!saved">
+		<p>Please create a session code:</p>
+		<input type="text" ng-show="!saved" ng-model="sessID">
+		<p>{{sessID}}</p>
+		<button ng-click="saveSession()">Submit</button>
+	</div>
+	<p ng-show="saved">Session code: {{saved}}</p>
+	<p>{{session}}</p>
+</div>
