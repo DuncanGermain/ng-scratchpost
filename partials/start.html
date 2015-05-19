@@ -11,20 +11,25 @@
 	</section>
 
 	<section ng-show="startOptions">
-		<p>{{msg}}</p>
-		<input type="text" ng-model="sessID">
-		<p>{{sessID}}</p>
-		<button ng-click="saveSession()" class="buttons startSubmit"><a href="#/leader">Submit</a></button>
+		<form name="codeEntry" novalidate>
+			<p class="startInstructions">{{sysMsg}}</p>
+			<div class="centerMe">
+				<input type="text" ng-model="sessID" class="startField" placeholder=" e.g. 'lecture'" required>
+				<input type="submit" ng-disabled="!sessID" ng-click="saveSession()" class="buttons startSubmit">
+			</div>
+		</form>
 	</section>
 
 	<section ng-show="joinOptions">
-		<p>{{msg}}</p>
-		<span>Session Code:</span><input type="text" ng-model="entryID"><br>
-		<span>Username:</span><input type="text" ng-model="userID">
-		<button ng-click="joinSession()" class="buttons startSubmit">Submit</button>
+		<form name="codeEntry" novalidate>
+			<p class="startInstructions">{{sysMsg}}</p>
+			<div class="centerMe">
+				<input type="text" ng-model="entryID" class="startField" placeholder=" Session code" required>
+				<input type="text" ng-model="userID" class="startField" placeholder=" Username" required>
+				<input type="submit" ng-disabled="!entryID || !userID" ng-click="joinSession()" class="buttons startSubmit">
+			</div>
+		</form>
 	</section>
 
-	<a href="#/leader">Start Session</a>
-	<a href="#/partic">Join Session</a>
 </div>
 
