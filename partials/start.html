@@ -1,9 +1,31 @@
 <div ng-controller="StartControl">
-	<a href="#/leader">Start Session</a>
-	<a href="#/partic">Join Session</a>
+	<section ng-show="startButtons">
+		<button ng-click="newSess()" class="buttons startButtons">
+			<img class="startButtonImg" src="img/ssart.png">
+			<span class="startButtonText">Create a new session</span>
+		</button>
+		<button ng-click="joinSess()" class="buttons startButtons">
+			<img class="startButtonImg" src="img/jsart.png">
+			<span class="startButtonText">Join an active session</span>
+		</button>
+	</section>
+
+	<section ng-show="startOptions">
+		<p>Please create a session code:</p>
+		<input type="text" ng-model="sessID">
+		<p>{{sessID}}</p>
+		<button ng-click="saveSession()"><a href="#/leader">Submit</a></button>
+	</section>
+
+
 	<pre>{{data | json}}</pre>
 
 	<p>------------------------------------------</p>
 
 	<pre>{{data.sessions | json}}</pre>
+
+
+	<a href="#/leader">Start Session</a>
+	<a href="#/partic">Join Session</a>
 </div>
+
