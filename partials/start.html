@@ -11,19 +11,18 @@
 	</section>
 
 	<section ng-show="startOptions">
-		<p>Please create a session code:</p>
+		<p>{{msg}}</p>
 		<input type="text" ng-model="sessID">
 		<p>{{sessID}}</p>
-		<button ng-click="saveSession()"><a href="#/leader">Submit</a></button>
+		<button ng-click="saveSession()" class="buttons startSubmit"><a href="#/leader">Submit</a></button>
 	</section>
 
-
-	<pre>{{data | json}}</pre>
-
-	<p>------------------------------------------</p>
-
-	<pre>{{data.sessions | json}}</pre>
-
+	<section ng-show="joinOptions">
+		<p>{{msg}}</p>
+		<span>Session Code:</span><input type="text" ng-model="entryID"><br>
+		<span>Username:</span><input type="text" ng-model="userID">
+		<button ng-click="joinSession()" class="buttons startSubmit">Submit</button>
+	</section>
 
 	<a href="#/leader">Start Session</a>
 	<a href="#/partic">Join Session</a>

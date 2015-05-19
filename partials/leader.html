@@ -1,10 +1,4 @@
 <div ng-controller="LeaderControl">
-	<!-- <div ng-hide="saved">
-		<p>Please create a session code:</p>
-		<input type="text" ng-model="sessID">
-		<p>{{sessID}}</p>
-		<button ng-click="saveSession()">Submit</button>
-	</div> -->
 
 	<div>
 		<p>Session {{sessID}} has been initialized.</p>
@@ -14,29 +8,9 @@
 		<button ng-click="pushQuestion()">Submit</button>
 		<p>{{pushed}}</p>
 
-
-
-		<h2>Steve Stuff</h2>
-		Steve's new nickname:
-		<input type="text" ng-model="stevestuff.nickname">
-		Steve's new age:
-		<input type="text" ng-model="stevestuff.age">
-		Steve's new job:
-		<input type="text" ng-model="stevestuff.profession">
-
-		{{stevestuff.nickname}}
-		{{stevestuff.age}}
-		{{stevestuff.profession}}
-
-		<br>
 		<input type="checkbox" ng-model="checkboxes.noAnon">Show names.</br>
 		<input type="checkbox" ng-model="checkboxes.noRedo">Disallow resubmits.</br>
 		<input type="checkbox" ng-model="checkboxes.noShow">Hide answers.</br>
-
-
-
-
-
 
 	</div>
 </div>
