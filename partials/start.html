@@ -1,9 +1,35 @@
 <div ng-controller="StartControl">
-	<a href="#/leader">Start Session</a>
-	<a href="#/partic">Join Session</a>
-	<pre>{{data | json}}</pre>
+	<section ng-show="startButtons">
+		<button ng-click="newSess()" class="buttons startButtons">
+			<img class="startButtonImg" src="img/ssart.png">
+			<span class="startButtonText">Create a new session</span>
+		</button>
+		<button ng-click="joinSess()" class="buttons startButtons">
+			<img class="startButtonImg" src="img/jsart.png">
+			<span class="startButtonText">Join an active session</span>
+		</button>
+	</section>
 
-	<p>------------------------------------------</p>
+	<section ng-show="startOptions">
+		<form name="codeEntry" novalidate>
+			<p class="startInstructions">{{sysMsg}}</p>
+			<div class="centerMe">
+				<input type="text" ng-model="sessID" class="startField" placeholder=" e.g. 'lecture'" required>
+				<input type="submit" ng-disabled="!sessID" ng-click="saveSession()" class="buttons startSubmit">
+			</div>
+		</form>
+	</section>
 
-	<pre>{{data.sessions | json}}</pre>
+	<section ng-show="joinOptions">
+		<form name="codeEntry" novalidate>
+			<p class="startInstructions">{{sysMsg}}</p>
+			<div class="centerMe">
+				<input type="text" ng-model="entryID" class="startField" placeholder=" Session code" required>
+				<input type="text" ng-model="userID" class="startField" placeholder=" Username" required>
+				<input type="submit" ng-disabled="!entryID || !userID" ng-click="joinSession()" class="buttons startSubmit">
+			</div>
+		</form>
+	</section>
+
 </div>
+
