@@ -1,16 +1,26 @@
 <div ng-controller="LeaderControl">
 
-	<div>
+	<section>
 		<p>Session {{sessID}} has been initialized.</p>
-		<p>Please enter a question to be pushed to your users:</p>
-		<input type="text" ng-model="question">
-		<p>{{question}}</p>
-		<button ng-click="pushQuestion()" class="buttons">Submit</button>
-		<p>{{pushed}}</p>
-
+		<p class="tiny">Active participants: {{attendance}}  Questions asked: {{asked}}</p>
 		<input type="checkbox" ng-model="checkboxes.noAnon">Show names.</br>
 		<input type="checkbox" ng-model="checkboxes.noRedo">Disallow resubmits.</br>
 		<input type="checkbox" ng-model="checkboxes.noShow">Hide answers.</br>
+	</section>
 
-	</div>
+	<section>
+		<span>Please enter a question to be pushed to your users:</span>
+		<button ng-click="pushQuestion()" class="buttons">Submit</button>
+		<textarea type="text" ng-model="question" placeholder="Quis custodiet ipsos custodes?" autofocus></textarea>
+	</section>
+
+	<section>
+		<select class="submittedDropdown" ng-model="history" ng-init="View previous questions">
+			<option ng-repeat="(num, content) in allQuestions | limitTo:20">
+				<pre>{{content}}</pre>
+			</option>
+		</select>
+		<button ng-click="resubmit()" class="buttons">Reload selected question</button>
+	</section>
+
 </div>
