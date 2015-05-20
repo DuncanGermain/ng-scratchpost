@@ -4,8 +4,52 @@
 	max-width: 280px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 30px;
+	margin-top: 60px;
 	margin-bottom: 30px;
+}
+
+#logoSmall {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	height: 144px;
+	width: 157px;
+	margin: 15px 15px 15px 0px;
+}
+
+#leaderControls {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	height: 144px;
+	min-width: 700px;
+	margin: 15px 0px 15px 15px;
+}
+
+#leaderInput {
+	display: inline-block;
+	position: relative;
+	height: 90px;
+	width: 600px;
+	resize: none;
+}
+
+#boxesAndButtons {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	height: 90px;
+	margin-left: 10px;
+}
+
+#stats {
+	display: block;
+	margin-bottom: 3px;
+}
+
+#pushQ {
+	margin-top: 7px;
+	width: 100px;
 }
 
 .startButtons {
@@ -46,7 +90,18 @@
 	display: table-cell;
 	vertical-align: middle;
 	margin-left: 5px;
+	font-size: 16px;
 	text-decoration: none;
+}
+.full {
+	width: 95%;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	min-width: 960px;
+}
+
+.header {
+	height: 174px;
 }
 
 .centerMe {
@@ -54,12 +109,4 @@
 	margin-top: 5px;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.submittedDropdown {
-	width: 400px;
-}
-
-option {
-	max-width: 400px;
 }

@@ -17,7 +17,7 @@
 		<form name="codeEntry" novalidate>
 			<p class="startInstructions">{{sysMsg}}</p>
 			<div class="centerMe">
-				<input type="text" ng-model="sessID" class="startField" placeholder=" e.g. '17 Pies'" required>
+				<input type="text" ng-model="sessID" class="startField" placeholder=" e.g. 'Eng 101'" required autofocus>
 				<input type="submit" ng-disabled="!sessID" ng-click="saveSession()" class="buttons startSubmit">
 			</div>
 		</form>
@@ -27,7 +27,7 @@
 		<form name="codeEntry" novalidate>
 			<p class="startInstructions">{{sysMsg}}</p>
 			<div class="centerMe">
-				<input type="text" ng-model="entryID" class="startField" placeholder=" Session code" required>
+				<input type="text" ng-model="entryID" class="startField" placeholder=" Session code" required autofocus>
 				<input type="text" ng-model="userID" class="startField" placeholder=" Username" required>
 				<input type="submit" ng-disabled="!entryID || !userID" ng-click="joinSession()" class="buttons startSubmit">
 			</div>

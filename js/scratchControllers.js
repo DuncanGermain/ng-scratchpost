@@ -53,7 +53,6 @@ scratchControllers.controller('StartControl', [
 			});
 		}
 
-
 		//Functionality for joining an existing session
 		$scope.joinSession = function() {
 			entryID = $scope.entryID;
@@ -85,7 +84,6 @@ scratchControllers.controller('StartControl', [
 		}
 	}]);
 
-
 scratchControllers.controller('LeaderControl', [
 	'$scope',
 	'$routeParams',
@@ -103,7 +101,7 @@ scratchControllers.controller('LeaderControl', [
 		//Initializes variables to track questions and participants
 		$scope.asked = 0;
 		$scope.attendance = 0;
-		$scope.allQuestions = {};
+		$scope.allQuestions = {0: 'Reload a previous question'};
 		$scope.history = false;
 		//Binds the checkboxes back to the Firebase
 		$firebaseObject(checkRef).$bindTo($scope, 'checkboxes');
@@ -125,7 +123,6 @@ scratchControllers.controller('LeaderControl', [
 			$scope.question = $scope.history;
 		}
 	}]);
-
 
 scratchControllers.controller('ParticControl', [
 	'$scope',
