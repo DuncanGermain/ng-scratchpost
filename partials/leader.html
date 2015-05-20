@@ -2,9 +2,10 @@
 
 	<div>
 		<p>Session {{sessID}} has been initialized.</p>
+		<p class="tiny">Active participants: {{attendance}}  Questions asked: {{asked}}</p>
 		<p>Please enter a question to be pushed to your users:</p>
-		<input type="text" ng-model="question">
-		<p>{{question}}</p>
+		<textarea type="text" ng-model="question" placeholder="Quis custodiet ipsos custodes?" autofocus></textarea>
+		<pre>{{question}}</pre>
 		<button ng-click="pushQuestion()" class="buttons">Submit</button>
 		<p>{{pushed}}</p>
 

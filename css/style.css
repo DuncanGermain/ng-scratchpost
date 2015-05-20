@@ -13,8 +13,8 @@
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	font-family: "Raleway";
-	font-weight: 500;
+	font-family: "Ubuntu";
+	font-weight: 400;
 	padding: 4px;
 	text-decoration: none;
 	color: #808080;
@@ -63,4 +63,39 @@
 	border-radius: 3px;
 	box-shadow: inset 1px 1px 2px 0 #e0e0e0;
  	box-shadow: 2px 2px 5px #3d3d3d;
+}
+
+.tiny {
+	font-family: "Ubuntu";
+	font-weight: 300;
+	font-size: 8pt;
+	color: #ebebeb;
+}
+
+p {
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 400;
+	font-size: 12pt;
+	color: #ebebeb;
+}
+
+textarea {
+	font-family: "Source Code Pro";
+	white-space: pre-wrap;
+	height: 400px;
+	width: 600px;
+	color: #4f4f4f;
+}
+
+pre {
+	font-family: "Source Code Pro";
+	white-space: pre-wrap;
+	max-width: 600px;
+	color: #4f4f4f;
+}
+
+input {
+	font-family: "Source Code Pro";
+	font-size: 10pt;
+	color: #4f4f4f;
 }
