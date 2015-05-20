@@ -72,6 +72,10 @@
 	color: #ebebeb;
 }
 
+.red {
+	color: red;
+}
+
 p {
 	font-family: "Ubuntu", sans-serif;
 	font-weight: 400;

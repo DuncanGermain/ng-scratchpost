@@ -19,7 +19,7 @@ scratchControllers.controller('StartControl', [
 		$scope.newSess = function() {
 			$scope.startButtons = false;
 			$scope.startOptions = true;
-			$scope.sysMsg = "Please create a session code.";
+			$scope.sysMsg = "Please create an alphanumeric session code.";
 		};
 		$scope.joinSess = function() {
 			$scope.startButtons = false;
@@ -30,16 +30,29 @@ scratchControllers.controller('StartControl', [
 		//Functionality for starting a new session
 		$scope.saveSession = function() {
 			sessID = $scope.sessID;
-			//Creates default object for a new session with the chosen name, and adds it to Firebase
-			var initObj = {};
-			initObj[sessID] = {
-				users: true,
-				questions: true,
-				checkboxes: {noAnon: false, noRedo: false, noShow: false}
-			};
-			sessRef.update(initObj);
-			$location.path('/leader'); //Routes to leader page
-		};
+			function makeSessID(sessID, unique) {
+				if (!unique) {
+					$scope.sysMsg = "Sorry, a session with that code is already in progress. Please enter a different code."
+				} else {
+					//Creates default object for a new session with the chosen name, and adds it to Firebase
+					var initObj = {};
+					initObj[sessID] = {
+						users: true,
+						questions: true,
+						checkboxes: {noAnon: false, noRedo: false, noShow: false}
+					};
+					sessRef.update(initObj);
+					$location.path('/leader'); //Routes to leader page
+				}
+				$scope.$apply(); //Angular scope cleanup
+			}
+			//Confirms that there is no data stored at the path corresponding to the entered session code
+			sessRef.child(sessID).once('value', function(snapshot) {
+				var unique = (snapshot.val() === null);
+				makeSessID(sessID, unique);
+			});
+		}
+
 
 		//Functionality for joining an existing session
 		$scope.joinSession = function() {
@@ -58,7 +71,7 @@ scratchControllers.controller('StartControl', [
 					sessRef.child(entryID).child('users').update(userObj);
 					$location.path('/partic'); //Routes to participant page
 				}
-				$scope.$apply(); //Angular scope cleanup; patch for bug where updating sysMsg and navigating to /partic required a double click, even though data was being sent to Firebase on the first click.
+				$scope.$apply(); //Angular scope cleanup
 			}
 			//Confirms that there is no data stored at the path corresponding to the entered username
 			sessRef.child(entryID).child('users').child(userID).once('value', function(snapshot) {
@@ -90,6 +103,8 @@ scratchControllers.controller('LeaderControl', [
 		//Initializes variables to track questions and participants
 		$scope.asked = 0;
 		$scope.attendance = 0;
+		$scope.allQuestions = {};
+		$scope.history = false;
 		//Binds the checkboxes back to the Firebase
 		$firebaseObject(checkRef).$bindTo($scope, 'checkboxes');
 		//Pushes new questions up to Firebase
@@ -100,20 +115,15 @@ scratchControllers.controller('LeaderControl', [
 			var questObj = {};
 			questObj[$scope.asked] = $scope.currentQ;
 			questRef.update(questObj);
-
 		}
-
-
-
-		// $scope.pushQuestion = function() {
-		// 	$scope.pushed = $scope.question;
-		// 	var obj = {
-		// 		question: $scope.pushed
-		// 	};
-		// 	console.log(obj);
-		// 	console.log(sessRef);
-		// 	console.log(sessRef.child($scope.saved));
-		// }
+		//Allows for storing/viewing/reloading of previous questions
+		questRef.on('child_added', function(snapshot) {
+			var updated = snapshot.val();
+			$scope.allQuestions[$scope.asked] = updated;
+		})
+		$scope.resubmit = function() {
+			$scope.question = $scope.history;
+		}
 	}]);
 
 
