@@ -140,14 +140,24 @@
 
 #myScratchpost {
 	display: block;
-	margin: 10px auto 5px auto;
 	padding: 5px 9px 5px 9px;
 	height: 212px;
-	width: 52.46%;
-	min-width: 340px;
+	width: 428px;
+	margin: 10px auto 10px auto;
 	resize: none;
 	background-color: white;
 	border: 5px solid #97FF93;
 	border-radius: 10px;
 	box-shadow: 3px 3px 3px #4f4f4f;
+}
+
+#buttonsAndHistory {
+	width: 428px;
+	margin: 5px auto 5px auto;
+	height: 150px;
+}
+
+#playNice {
+	display: inline-block;
+	margin-left: 15px;
 }
