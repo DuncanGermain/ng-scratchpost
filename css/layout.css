@@ -4,8 +4,62 @@
 	max-width: 280px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 30px;
+	margin-top: 60px;
 	margin-bottom: 30px;
+}
+
+#logoSmall {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	height: 144px;
+	width: 157px;
+	margin: 15px 15px 15px 0px;
+}
+
+#logoPart {
+	display: block;
+	height: 144px;
+	width: 157px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px;
+}
+
+#leaderControls {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	height: 144px;
+	min-width: 700px;
+	margin: 15px 0px 15px 15px;
+}
+
+#leaderInput {
+	display: inline-block;
+	position: relative;
+	height: 90px;
+	width: 550px;
+	resize: none;
+	padding-left: 5px;
+}
+
+#boxesAndButtons {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	height: 90px;
+	margin-left: 10px;
+}
+
+#stats {
+	display: block;
+	margin-bottom: 3px;
+}
+
+#pushQ {
+	margin-top: 7px;
+	width: 100px;
 }
 
 .startButtons {
@@ -46,7 +100,18 @@
 	display: table-cell;
 	vertical-align: middle;
 	margin-left: 5px;
+	font-size: 16px;
 	text-decoration: none;
+}
+.full {
+	width: 95%;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	min-width: 960px;
+}
+
+.header {
+	height: 174px;
 }
 
 .centerMe {
@@ -56,10 +121,33 @@
 	margin-right: auto;
 }
 
-.submittedDropdown {
-	width: 400px;
+.centered {
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
 }
 
-option {
-	max-width: 400px;
+#promptBox {
+	height: 126px;
+	margin: 5px auto 10px auto;
+}
+
+#particControls {
+	height: 242px;
+}
+
+#myScratchpost {
+	display: block;
+	margin: 10px auto 5px auto;
+	padding: 5px 9px 5px 9px;
+	height: 212px;
+	width: 52.46%;
+	min-width: 340px;
+	resize: none;
+	background-color: white;
+	border: 5px solid #97FF93;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px #4f4f4f;
 }
