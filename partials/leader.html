@@ -31,8 +31,12 @@
 			</div>
 			<!--Dropdown containing history of previously submitted questions-->
 			<div class="styledDropdown">
-				<select class="submittedDropdown" ng-model="history" ng-init="history=allQuestions[0]" ng-options="allQuestions[num] | limitTo:30
-				for (num, content) in allQuestions" ng-change="resubmit()"></select>
+				<select class="submittedDropdown"
+				ng-model="history"
+				ng-init="history=allQuestions[0]"
+				ng-options="allQuestions[num] | limitTo:30
+				for (num, content) in allQuestions"
+				ng-change="resubmit()"></select>
 			</div>
 	</section>
 	<!--Dividing line between header and main content-->

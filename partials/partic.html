@@ -3,18 +3,20 @@
 	<span class="large blue centered">Welcome, {{userID}}.</span>
 	<!--Dividing line between header and main content-->
 	<div class="thinLine"></div>
-	<section id="promptBox">
-		<span class="small centered" ng-hide="prompt">You have joined session {{entryID}}.</span>
-		<span class="small centered" ng-hide="prompt">Please wait for your session leader to submit a prompt.</span>
-		<pre ng-show="prompt">{{prompt}}</pre>
-	</section>
-	<section id="particControls">
-		<textarea id="myScratchpost" ng-model="myAnswer" autofocus placeholder="Type your answer here."></textarea>
-		<div class="styledDropdown">
-				<select class="submittedDropdown">
-				<!-- ng-model="history" ng-init="history=allQuestions[0]" ng-options="allQuestions[num] | limitTo:30
-				for (num, content) in allQuestions" ng-change="resubmit()"> -->
-				</select>
+	<!--Prompt and participant input-->
+	<pre id="myPrompt">{{prompt}}</pre>
+	<textarea id="myScratchpost" ng-model="myAnswer" autofocus placeholder="Type your answer here."></textarea>
+	<div id="buttonsAndHistory">
+		<!--Submission button for pushing answers-->
+		<button ng-click="pushAnswer()" id="pushQ" class="buttons"
+		ng-disabled="!myAnswer || (myAnswer === currentA)">Submit</button>
+		<!--Dropdown for history/resubmission-->
+		<div class="styledDropdown" id="playNice">
+				<select class="submittedDropdown"
+				ng-model="history"
+				ng-init="history=allAnswers[0]"
+				ng-options="answer for answer in allAnswers | limitTo:30"
+				ng-change="resubmit()"></select>
 		</div>
-	</section>
+	</div>
 </div>

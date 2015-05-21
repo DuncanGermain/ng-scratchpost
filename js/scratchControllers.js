@@ -66,7 +66,7 @@ scratchControllers.controller('StartControl', [
 				} else {
 					//Creates default object for a new user with the chosen username, and adds it to Firebase
 					var userObj = {};
-					userObj[userID] = {data: 'New user!'};
+					userObj[userID] = {response: 'New user!'};
 					sessRef.child(entryID).child('users').update(userObj);
 					$location.path('/partic'); //Routes to participant page
 				}
@@ -108,6 +108,15 @@ scratchControllers.controller('LeaderControl', [
 		$scope.history = false;
 		//Binds the checkboxes back to the Firebase
 		$firebaseObject(checkRef).$bindTo($scope, 'checkboxes');
+		//Keeps count of total users
+		usersRef.on('child_added', function(snapshot) {
+			$scope.attendance++;
+			$scope.$apply(); //Angular scope cleanup.
+		});
+		usersRef.on('child_removed', function(snapshot) {
+			$scope.attendance--;
+			$scope.$apply(); //Angular scope cleanup.
+		});
 		//Pushes new questions up to Firebase
 		$scope.pushQuestion = function() {
 			$scope.asked++;
@@ -132,22 +141,33 @@ scratchControllers.controller('ParticControl', [
 	'$routeParams',
 	'$firebaseObject',
 	function($scope, $routeParams, $firebaseObject) {
-		//Ensures that Firebase empties when the participant disconnects
-		var disconnectMe = sessRef.child(entryID).child('users').child(userID);
-		disconnectMe.onDisconnect().remove();
 		//Creates quick references for the questions and checkboxes within the session
 		var questRef = sessRef.child(entryID).child('questions');
 		var checkRef = sessRef.child(entryID).child('checkboxes');
+		var meRef = sessRef.child(entryID).child('users').child(userID);
+		//Ensures that Firebase empties when the participant disconnects
+		meRef.onDisconnect().remove();
 		//Initializes variables to track questions and participants
 		$scope.userID = userID;
 		$scope.entryID = entryID;
+		$scope.prompt = "You have joined session " + entryID + ".\n\nPlease wait for your session leader to submit a prompt."
+		$scope.allAnswers = ['Reload a previous answer'];
+		//Pulls questions down from Firebase
 		questRef.on('child_added', function(snapshot) {
 			var updated = snapshot.val();
 			console.log(updated);
 			$scope.prompt = updated;
 			$scope.$apply(); //Angular scope cleanup.
 		});
-
+		//Sets the current answer equal to the participant's entry on the page
+		$scope.pushAnswer = function() {
+			$scope.currentA = $scope.myAnswer;
+			meRef.child('response').set($scope.currentA);
+			$scope.allAnswers.push($scope.currentA);
+		}
+		$scope.resubmit = function() {
+			$scope.myAnswer = $scope.history;
+		}
 
 
 	}]);

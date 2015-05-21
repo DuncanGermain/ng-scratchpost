@@ -119,9 +119,11 @@ pre {
 	font-family: "Source Code Pro";
 	white-space: pre-wrap;
 	color: #4f4f4f;
+}
+
+#myPrompt {
 	height: 106px;
-	width: 50%;
-	min-width: 340px;
+	width: 400px;
 	padding: 5px 9px 5px 9px;
 	margin: 5px auto 5px auto;
 	background-color: white;
@@ -142,7 +144,7 @@ input {
 }
 
 .submittedDropdown {
-  width: 300px;
+  width: 308px;
   height: 20px;
   overflow: hidden;
   background-color: #F0F0F0;
@@ -156,7 +158,7 @@ input {
 }
 .submittedDropdown select {
   background: transparent;
-  width: 300px;
+  width: 308px;
   padding: 5px;
   font-size: 8px;
   font-family: "Source Code Pro";
