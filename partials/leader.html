@@ -1,5 +1,4 @@
 <div ng-controller="LeaderControl">
-
 	<section class="full header">
 		<img id="logoSmall" src="img/logo.png">
 		<div id="leaderControls">
@@ -7,7 +6,12 @@
 				<span class="tiny">Session ID: {{sessID}}</span>
 				<span class="tiny">Active participants: {{attendance}}</span>
 			</div>
-			<textarea id="leaderInput" type="text" ng-model="question" placeholder="Please enter a question to be pushed to your users." autofocus></textarea>
+			<!--Input for pushing questions to the users-->
+			<textarea id="leaderInput" ng-model="question" autofocus
+			placeholder="Please enter a prompt to be pushed to the group."></textarea>
+			<!--Controls for showing/hiding names, allowing/denying resubmission, and
+			showing/hiding content (e.g. for test/quiz answers to be revealed
+			simultaneously)-->
 			<div id="boxesAndButtons">
 				<div class="boxAndLabel">
 					<input type="checkbox" ng-model="checkboxes.noAnon">
@@ -21,16 +25,22 @@
 					<input type="checkbox" ng-model="checkboxes.noShow">
 					<span class="small">Hide answers</span>
 				</div>
-				<button ng-click="pushQuestion()" id="pushQ" class="buttons" ng-disabled="!question || (question === currentQ)">Submit</button>
+				<!--Submission button for pushing questions-->
+				<button ng-click="pushQuestion()" id="pushQ" class="buttons"
+				ng-disabled="!question || (question === currentQ)">Submit</button>
 			</div>
+			<!--Dropdown containing history of previously submitted questions-->
 			<div class="styledDropdown">
-				<select class="submittedDropdown" ng-model="history" ng-init="history=allQuestions[0]" ng-options="allQuestions[num] | limitTo:30 for (num, content) in allQuestions" ng-change="resubmit()"></select>
+				<select class="submittedDropdown" ng-model="history" ng-init="history=allQuestions[0]" ng-options="allQuestions[num] | limitTo:30
+				for (num, content) in allQuestions" ng-change="resubmit()"></select>
 			</div>
 	</section>
-
+	<!--Dividing line between header and main content-->
 	<div class="thinLine"></div>
-
-
+	<!--Wait message for main screen-->
+	<p ng-show="attendance === 0" class="large blue centered">&#60Waiting for participants to join&#62</p>
+	<!--Display section for participant answers-->
+	<section id="scratchpost" class="window-frame sortable">
 
 </div>
 

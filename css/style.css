@@ -59,7 +59,7 @@
 .thinLine {
 	height: 2px;
 	width: 95%;
-	margin: 15px 2.5% 15px 2.5%;
+	margin: 20px 2.5% 20px 2.5%;
 	background: -moz-linear-gradient(left,  rgba(79,79,79,0) 0%, rgba(235,235,235,1) 17%, rgba(235,235,235,1) 83%, rgba(79,79,79,0) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(79,79,79,0)), color-stop(17%,rgba(235,235,235,1)), color-stop(83%,rgba(235,235,235,1)), color-stop(100%,rgba(79,79,79,0))); /* Chrome,Safari4+ */
   background: -webkit-linear-gradient(left,  rgba(79,79,79,0) 0%,rgba(235,235,235,1) 17%,rgba(235,235,235,1) 83%,rgba(79,79,79,0) 100%); /* Chrome10+,Safari5.1+ */
@@ -92,6 +92,13 @@ textarea {
 	color: #4f4f4f;
 }
 
+.large {
+	font-family: "Ubuntu";
+	font-weight: 700;
+	font-size: 24pt;
+	text-shadow: 2px 2px #4f4f4f;
+}
+
 .small {
 	font-family: "Ubuntu";
 	font-weight: 400;
@@ -111,14 +118,23 @@ textarea {
 pre {
 	font-family: "Source Code Pro";
 	white-space: pre-wrap;
-	max-width: 600px;
 	color: #4f4f4f;
+	height: 106px;
+	width: 50%;
+	min-width: 340px;
+	padding: 5px 9px 5px 9px;
+	margin: 5px auto 5px auto;
+	background-color: white;
+	border: 5px solid #A0DAFF;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px #4f4f4f;
 }
 
 input {
 	font-family: "Source Code Pro";
 	font-size: 10pt;
 	color: #4f4f4f;
+	padding-left: 5px;
 }
 
 .styledDropdown {

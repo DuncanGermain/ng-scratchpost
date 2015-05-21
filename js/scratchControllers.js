@@ -73,8 +73,11 @@ scratchControllers.controller('StartControl', [
 				$scope.$apply(); //Angular scope cleanup
 			}
 			//Confirms that there is no data stored at the path corresponding to the entered username
-			sessRef.child(entryID).child('users').child(userID).once('value', function(snapshot) {
-				unique = (snapshot.val() === null);
+			sessRef.child(entryID)
+						 .child('users')
+						 .child(userID)
+						 .once('value', function(snapshot) {
+							unique = (snapshot.val() === null);
 			});
 			//Confirms that there IS data stored at the path corresponding to the entered session code
 			sessRef.child(entryID).once('value', function(snapshot) {
@@ -129,10 +132,21 @@ scratchControllers.controller('ParticControl', [
 	'$routeParams',
 	'$firebaseObject',
 	function($scope, $routeParams, $firebaseObject) {
+		//Ensures that Firebase empties when the participant disconnects
 		var disconnectMe = sessRef.child(entryID).child('users').child(userID);
 		disconnectMe.onDisconnect().remove();
+		//Creates quick references for the questions and checkboxes within the session
+		var questRef = sessRef.child(entryID).child('questions');
+		var checkRef = sessRef.child(entryID).child('checkboxes');
+		//Initializes variables to track questions and participants
 		$scope.userID = userID;
 		$scope.entryID = entryID;
+		questRef.on('child_added', function(snapshot) {
+			var updated = snapshot.val();
+			console.log(updated);
+			$scope.prompt = updated;
+			$scope.$apply(); //Angular scope cleanup.
+		});
 
 
 

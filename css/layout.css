@@ -17,6 +17,15 @@
 	margin: 15px 15px 15px 0px;
 }
 
+#logoPart {
+	display: block;
+	height: 144px;
+	width: 157px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px;
+}
+
 #leaderControls {
 	display: inline-block;
 	position: relative;
@@ -30,8 +39,9 @@
 	display: inline-block;
 	position: relative;
 	height: 90px;
-	width: 600px;
+	width: 550px;
 	resize: none;
+	padding-left: 5px;
 }
 
 #boxesAndButtons {
@@ -109,4 +119,35 @@
 	margin-top: 5px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.centered {
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+}
+
+#promptBox {
+	height: 126px;
+	margin: 5px auto 10px auto;
+}
+
+#particControls {
+	height: 242px;
+}
+
+#myScratchpost {
+	display: block;
+	margin: 10px auto 5px auto;
+	padding: 5px 9px 5px 9px;
+	height: 212px;
+	width: 52.46%;
+	min-width: 340px;
+	resize: none;
+	background-color: white;
+	border: 5px solid #97FF93;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px #4f4f4f;
 }

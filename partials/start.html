@@ -2,6 +2,7 @@
 	<img id="logoMain" src="img/logo.png">
 </header>
 <div ng-controller="StartControl">
+	<!--Logo and buttons for landing page-->
 	<section ng-show="startButtons">
 		<button ng-click="newSess()" class="buttons startButtons">
 			<img class="startButtonImg" src="img/ssart.png">
@@ -12,27 +13,26 @@
 			<span class="startButtonText">Join an active session</span>
 		</button>
 	</section>
-
+	<!--Instructions and inputs for starting a new session-->
 	<section ng-show="startOptions">
 		<form name="codeEntry" novalidate>
 			<p class="startInstructions">{{sysMsg}}</p>
 			<div class="centerMe">
-				<input type="text" ng-model="sessID" class="startField" placeholder=" e.g. 'Eng 101'" required autofocus>
+				<input type="text" ng-model="sessID" class="startField" placeholder="e.g. 'Eng 101'" required autofocus>
 				<input type="submit" ng-disabled="!sessID" ng-click="saveSession()" class="buttons startSubmit">
 			</div>
 		</form>
 	</section>
-
+	<!--Instructions and inputs for joining an existing session-->
 	<section ng-show="joinOptions">
 		<form name="codeEntry" novalidate>
 			<p class="startInstructions">{{sysMsg}}</p>
 			<div class="centerMe">
-				<input type="text" ng-model="entryID" class="startField" placeholder=" Session code" required autofocus>
-				<input type="text" ng-model="userID" class="startField" placeholder=" Username" required>
+				<input type="text" ng-model="entryID" class="startField" placeholder="Session code" required autofocus>
+				<input type="text" ng-model="userID" class="startField" placeholder="Username" required>
 				<input type="submit" ng-disabled="!entryID || !userID" ng-click="joinSession()" class="buttons startSubmit">
 			</div>
 		</form>
 	</section>
-
 </div>
 
