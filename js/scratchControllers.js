@@ -39,7 +39,7 @@ scratchControllers.controller('StartControl', [
 					initObj[sessID] = {
 						users: true,
 						questions: true,
-						checkboxes: {noAnon: false, noRedo: false, noShow: false}
+						noRedo: false
 					};
 					sessRef.update(initObj);
 					$location.path('/leader'); //Routes to leader page
@@ -98,17 +98,18 @@ scratchControllers.controller('LeaderControl', [
 		var disconnectMe = sessRef.child(sessID);
 		disconnectMe.onDisconnect().remove();
 		//Creates quick references for the users, questions, and checkboxes within the session
-		var usersRef = sessRef.child(sessID).child('users');
-		var questRef = sessRef.child(sessID).child('questions');
-		var checkRef = sessRef.child(sessID).child('checkboxes');
+		var thisRef = sessRef.child(sessID);
+		var usersRef = thisRef.child('users');
+		var questRef = thisRef.child('questions');
+		var redoRef = thisRef.child('noRedo');
 		//Initializes variables to track questions and participants
 		$scope.asked = 0;
 		$scope.attendance = 0;
 		$scope.allQuestions = {0: 'Reload a previous question'};
 		$scope.history = false;
-		//Binds the checkboxes back to the Firebase
-		$firebaseObject(checkRef).$bindTo($scope, 'checkboxes');
-		//Keeps count of total users
+		//Binds the noRedo checkbox back to the Firebase
+		$firebaseObject(thisRef).$bindTo($scope, 'thisRef');
+		//Keeps count of total participants
 		usersRef.on('child_added', function(snapshot) {
 			$scope.attendance++;
 			$scope.$apply(); //Angular scope cleanup.
@@ -117,6 +118,8 @@ scratchControllers.controller('LeaderControl', [
 			$scope.attendance--;
 			$scope.$apply(); //Angular scope cleanup.
 		});
+		//Binds a new participant's Firebase object to a div in the display area
+		$firebaseObject(usersRef).$bindTo($scope, 'participants');
 		//Pushes new questions up to Firebase
 		$scope.pushQuestion = function() {
 			$scope.asked++;
@@ -134,6 +137,9 @@ scratchControllers.controller('LeaderControl', [
 		$scope.resubmit = function() {
 			$scope.question = $scope.history;
 		}
+		$scope.closeWindow = function() {
+			alert("clicked");
+		}
 	}]);
 
 scratchControllers.controller('ParticControl', [
@@ -142,9 +148,10 @@ scratchControllers.controller('ParticControl', [
 	'$firebaseObject',
 	function($scope, $routeParams, $firebaseObject) {
 		//Creates quick references for the questions and checkboxes within the session
-		var questRef = sessRef.child(entryID).child('questions');
-		var checkRef = sessRef.child(entryID).child('checkboxes');
-		var meRef = sessRef.child(entryID).child('users').child(userID);
+		var thisRef = sessRef.child(entryID);
+		var questRef = thisRef.child('questions');
+		var redoRef = thisRef.child('noRedo');
+		var meRef = thisRef.child('users').child(userID);
 		//Ensures that Firebase empties when the participant disconnects
 		meRef.onDisconnect().remove();
 		//Initializes variables to track questions and participants

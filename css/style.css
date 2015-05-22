@@ -115,23 +115,17 @@ textarea {
 	margin-right: 20px;
 }
 
-pre {
-	font-family: "Source Code Pro";
-	white-space: pre-wrap;
+.byline {
+	font-family: "Ubuntu";
+	font-weight: 300;
+	font-size: 8pt;
 	color: #4f4f4f;
+	vertical-align: top;
 }
 
-#myPrompt {
-	height: 106px;
-	width: 400px;
-	padding: 5px 9px 5px 9px;
-	margin: 5px auto 5px auto;
-	background-color: white;
-	border: 5px solid #A0DAFF;
-	border-radius: 10px;
-	box-shadow: 3px 3px 3px #4f4f4f;
+.closeWindow {
+	display: inline-block;
 }
-
 input {
 	font-family: "Source Code Pro";
 	font-size: 10pt;
