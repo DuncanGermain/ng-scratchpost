@@ -14,15 +14,15 @@
 			simultaneously)-->
 			<div id="boxesAndButtons">
 				<div class="boxAndLabel">
-					<input type="checkbox" ng-model="checkboxes.noAnon">
+					<input type="checkbox" ng-model="noAnon">
 					<span class="small">Show names</span>
 				</div>
 				<div class="boxAndLabel">
-					<input type="checkbox" ng-model="checkboxes.noRedo">
+					<input type="checkbox" ng-model="thisRef.noRedo">
 					<span class="small">Disallow resubmits</span>
 				</div>
 				<div class="boxAndLabel">
-					<input type="checkbox" ng-model="checkboxes.noShow">
+					<input type="checkbox" ng-model="noShow">
 					<span class="small">Hide answers</span>
 				</div>
 				<!--Submission button for pushing questions-->
@@ -46,9 +46,9 @@
 	<!--Display section for participant answers-->
 	<section id="scratchpost" class="window-frame sortable">
 		<div class="userWindow bounceIn" ng-repeat="(key, val) in participants" ng-show="val.response">
-			<span class="byline">{{key}}</span>
+			<span class="byline" ng-show="noAnon">{{key}}</span>
 			<img src="img/close.png" ng-click="closeWindow()" class="closeWindow">
-			<pre class="content" contenteditable="true">{{val.response}}</pre>
+			<pre class="content" contenteditable="true" ng-show="!noShow">{{val.response}}</pre>
 		</div>
 	</section>
 </div>
