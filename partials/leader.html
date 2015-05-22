@@ -45,7 +45,12 @@
 	<p ng-show="attendance === 0" class="large blue centered">&#60Waiting for participants to join&#62</p>
 	<!--Display section for participant answers-->
 	<section id="scratchpost" class="window-frame sortable">
-
+		<div class="userWindow bounceIn" ng-repeat="(key, val) in participants" ng-show="val.response">
+			<span class="byline">{{key}}</span>
+			<img src="img/close.png" ng-click="closeWindow()" class="closeWindow">
+			<pre class="content" contenteditable="true">{{val.response}}</pre>
+		</div>
+	</section>
 </div>
 
 

@@ -108,7 +108,7 @@ scratchControllers.controller('LeaderControl', [
 		$scope.history = false;
 		//Binds the checkboxes back to the Firebase
 		$firebaseObject(checkRef).$bindTo($scope, 'checkboxes');
-		//Keeps count of total users
+		//Keeps count of total participants
 		usersRef.on('child_added', function(snapshot) {
 			$scope.attendance++;
 			$scope.$apply(); //Angular scope cleanup.
@@ -117,6 +117,8 @@ scratchControllers.controller('LeaderControl', [
 			$scope.attendance--;
 			$scope.$apply(); //Angular scope cleanup.
 		});
+		//Binds a new participant's Firebase object to a div in the display area
+		$firebaseObject(usersRef).$bindTo($scope, 'participants');
 		//Pushes new questions up to Firebase
 		$scope.pushQuestion = function() {
 			$scope.asked++;
@@ -133,6 +135,11 @@ scratchControllers.controller('LeaderControl', [
 		})
 		$scope.resubmit = function() {
 			$scope.question = $scope.history;
+		}
+		$scope.closeWindow = function() {
+			alert("clicked");
+			$parent.visible = false;
+			$scope.$apply();
 		}
 	}]);
 

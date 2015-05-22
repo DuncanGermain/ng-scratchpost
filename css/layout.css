@@ -138,6 +138,23 @@
 	height: 242px;
 }
 
+#myPrompt {
+	font-family: "Source Code Pro";
+	white-space: pre-wrap;
+	color: #4f4f4f;
+	height: 106px;
+	width: 400px;
+	padding: 5px 9px 5px 9px;
+	margin: 5px auto 5px auto;
+	background-color: white;
+	border: 5px solid #A0DAFF;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px #4f4f4f;
+}
+#scratchpost {
+	margin-top: 15px;
+}
+
 #myScratchpost {
 	display: block;
 	padding: 5px 9px 5px 9px;
@@ -160,4 +177,16 @@
 #playNice {
 	display: inline-block;
 	margin-left: 15px;
+}
+
+.userWindow {
+	display: inline-block;
+	margin: 10px;
+	width: 240px;
+	height: 180px;
+	background-color: white;
+	padding: 5px 9px 5px 9px;
+	border: 5px solid #97FF93;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px #4f4f4f;
 }
