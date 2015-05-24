@@ -14,16 +14,16 @@
 			simultaneously)-->
 			<div id="boxesAndButtons">
 				<div class="boxAndLabel">
-					<input type="checkbox" ng-model="noAnon">
-					<span class="small">Show names</span>
-				</div>
-				<div class="boxAndLabel">
-					<input type="checkbox" ng-model="thisRef.noRedo">
-					<span class="small">Disallow resubmits</span>
+					<input type="checkbox" ng-model="noName">
+					<span class="small">Hide names</span>
 				</div>
 				<div class="boxAndLabel">
 					<input type="checkbox" ng-model="noShow">
 					<span class="small">Hide answers</span>
+				</div>
+				<div class="boxAndLabel">
+					<input type="checkbox" ng-model="thisRef.noRedo">
+					<span class="small">Disallow resubmits</span>
 				</div>
 				<!--Submission button for pushing questions-->
 				<button ng-click="pushQuestion()" id="pushQ" class="buttons"
@@ -44,9 +44,21 @@
 	<!--Wait message for main screen-->
 	<p ng-show="attendance === 0" class="large blue centered">&#60Waiting for participants to join&#62</p>
 	<!--Display section for participant answers-->
-	<section id="scratchpost" class="window-frame sortable">
-		<div class="userWindow bounceIn" ng-repeat="(key, val) in participants" ng-show="val.response">
-			<span class="byline" ng-show="noAnon">{{key}}</span>
+	<section id="scratchpost" class="sortable">
+		<div ng-class="{userWindow:       true,
+										animated:         true,
+										bounceIn:         true,
+										oneWin:           attendance === 1,
+										twoWin:           attendance === 2,
+										threeWin:         attendance === 3,
+										fourWin:          attendance === 4,
+										fiveToSixWin:     5 <= attendance && attendance <= 6,
+										sevenToNineWin:   7 <= attendance && attendance <= 9,
+										tenToTwelveWin:   10 <= attendance && attendance <=12,
+										thirteenAndUpWin: attendance > 12}"
+				 ng-repeat="(key, val) in participants"
+				 ng-show="val.response">
+			<span class="byline" ng-hide="noName">{{key}}</span>
 			<img src="img/close.png" ng-click="closeWindow()" class="closeWindow">
 			<pre class="content" contenteditable="true" ng-show="!noShow">{{val.response}}</pre>
 		</div>
