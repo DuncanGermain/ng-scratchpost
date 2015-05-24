@@ -1,11 +1,11 @@
 # ng-scratchpost 3.0
 Scratchpost is a web-based single-page app using Angular and Firebase.  It is designed to supplement lectures and discussions by allowing multiple participants to contribute answers/content to individual sections of a single, projected window.
 
-Concept: Conor Moreton (2009)
-Original design: Stephanie Zolayvar (2009)
-ver 2.0: scratchpost.herokuapp.com/index.html
-2.0 design: Conor Moreton, Matthew McClure, Nathan O'Brien (Jan 2015), with assistance from the staff at CodeFellows
-3.0 design: Conor Moreton (May 2015), with assistance from Stephanie Zolayvar
+Concept: Conor Moreton (2009) <br>
+Original design: Stephanie Zolayvar (2009) <br>
+ver 2.0: scratchpost.herokuapp.com/index.html <br>
+2.0 design: Conor Moreton, Matthew McClure, Nathan O'Brien (Jan 2015), with assistance from CodeFellows <br>
+3.0 design: Conor Moreton (May 2015), with assistance from Stephanie Zolayvar <br>
 
 Workflow:
  - The SESSION LEADER initiates a session by creating a session code.
