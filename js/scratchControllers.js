@@ -66,7 +66,8 @@ scratchControllers.controller('StartControl', [
 				} else {
 					//Creates default object for a new user with the chosen username, and adds it to Firebase
 					var userObj = {};
-					userObj[userID] = {response: 'New user!'};
+					var loggedIn = userID + ' has joined session ' + entryID + '.'
+					userObj[userID] = {response: loggedIn};
 					sessRef.child(entryID).child('users').update(userObj);
 					$location.path('/partic'); //Routes to participant page
 				}
@@ -104,6 +105,8 @@ scratchControllers.controller('LeaderControl', [
 		var redoRef = thisRef.child('noRedo');
 		//Initializes variables to track questions and participants
 		$scope.asked = 0;
+		$scope.answersShown = 0; //Changes layout when session leader closes a user's window
+		$scope.clean = false //This is the "show a window for every user" variable
 		$scope.attendance = 0;
 		$scope.allQuestions = {0: 'Reload a previous question'};
 		$scope.history = false;
@@ -112,10 +115,12 @@ scratchControllers.controller('LeaderControl', [
 		//Keeps count of total participants
 		usersRef.on('child_added', function(snapshot) {
 			$scope.attendance++;
+			$scope.answersShown++;
 			$scope.$apply(); //Angular scope cleanup.
 		});
 		usersRef.on('child_removed', function(snapshot) {
 			$scope.attendance--;
+			$scope.answersShown--;
 			$scope.$apply(); //Angular scope cleanup.
 		});
 		//Binds a new participant's Firebase object to a div in the display area
@@ -123,7 +128,9 @@ scratchControllers.controller('LeaderControl', [
 		//Pushes new questions up to Firebase
 		$scope.pushQuestion = function() {
 			$scope.asked++;
+			$scope.clean = true; //Setting clean to true brings back all user windows that were closed/hidden during debrief of the previous set of answers
 			$scope.currentQ = $scope.question;
+			$scope.answersShown = $scope.attendance;
 			//Assigns question content to a numbered key, and adds it to Firebase
 			var questObj = {};
 			questObj[$scope.asked] = $scope.currentQ;
@@ -137,8 +144,10 @@ scratchControllers.controller('LeaderControl', [
 		$scope.resubmit = function() {
 			$scope.question = $scope.history;
 		}
-		$scope.closeWindow = function() {
-			alert("clicked");
+		$scope.closeWindow = function(key) {
+			$scope.clean = false;
+			usersRef.child(key).child('response').set('');
+			$scope.answersShown--;
 		}
 	}]);
 
