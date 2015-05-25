@@ -48,18 +48,18 @@
 		<div ng-class="{userWindow:       true,
 										animated:         true,
 										bounceIn:         true,
-										oneWin:           attendance === 1,
-										twoWin:           attendance === 2,
-										threeWin:         attendance === 3,
-										fourWin:          attendance === 4,
-										fiveToSixWin:     5 <= attendance && attendance <= 6,
-										sevenToNineWin:   7 <= attendance && attendance <= 9,
-										tenToTwelveWin:   10 <= attendance && attendance <=12,
-										thirteenAndUpWin: attendance > 12}"
+										oneWin:           answersShown === 1,
+										twoWin:           answersShown === 2,
+										threeWin:         answersShown === 3,
+										fourWin:          answersShown === 4,
+										fiveToSixWin:     5 <= answersShown && answersShown <= 6,
+										sevenToNineWin:   7 <= answersShown && answersShown <= 9,
+										tenToTwelveWin:   10 <= answersShown && answersShown <=12,
+										thirteenAndUpWin: answersShown > 12}"
 				 ng-repeat="(key, val) in participants"
-				 ng-show="val.response">
+				 ng-show="val.response !== '' || clean">
 			<span class="byline" ng-hide="noName">{{key}}</span>
-			<img src="img/close.png" ng-click="closeWindow()" class="closeWindow">
+			<img src="img/close.png" ng-click="closeWindow(key)" class="closeWindow">
 			<pre class="content" contenteditable="true" ng-show="!noShow">{{val.response}}</pre>
 		</div>
 	</section>
