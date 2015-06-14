@@ -1,9 +1,5 @@
-var scratchControllers = angular.module('scratchControllers', []);
 var ref = new Firebase('https://resplendent-fire-4150.firebaseio.com');
 var sessRef = ref.child('sessions');
-var sessID, // Session code as created by the leader
-		entryID, // Session code as entered by a participant
-		userID; // Username as entered by a participant
 
 scratchApp.startController = function($scope, $routeParams, $firebaseObject, $location) {
 	this.scope = $scope;
