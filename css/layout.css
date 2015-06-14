@@ -142,6 +142,7 @@
 #myPrompt {
 	font-family: "Source Code Pro";
 	white-space: pre-wrap;
+	word-wrap: normal;
 	overflow: scroll;
 	color: #4f4f4f;
 	height: 106px;
@@ -166,6 +167,7 @@
 	margin: 10px auto 10px auto;
 	resize: none;
 	background-color: white;
+	word-wrap: normal;
 	border: 5px solid #97FF93;
 	border-radius: 10px;
 	box-shadow: 3px 3px 3px #4f4f4f;

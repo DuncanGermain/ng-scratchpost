@@ -89,6 +89,7 @@ p {
 textarea {
 	font-family: "Source Code Pro";
 	white-space: pre-wrap;
+	word-wrap: normal;
 	color: #4f4f4f;
 }
 
