@@ -78,3 +78,5 @@ scratchApp.startController.prototype.joinSession() = {
     checkSessID(entryID, exists, unique);
 	});
 };
+
+scratchApp.ngModule.controller('startController', scratchApp.startController);
