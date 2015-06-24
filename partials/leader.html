@@ -1,24 +1,24 @@
-<div ng-controller="LeaderControl">
+<div ng-controller="leaderController as lead">
 	<section class="full header">
 		<img id="logoSmall" src="img/logo.png">
 		<div id="leaderControls">
 			<div id="stats">
-				<span class="tiny">Session ID: {{sessID}}</span>
-				<span class="tiny">Active participants: {{attendance}}</span>
+				<span class="tiny">Session ID: {{lead.SessionName.sessID}}</span>
+				<span class="tiny">Active participants: {{lead.attendance}}</span>
 			</div>
 			<!--Input for pushing questions to the users-->
-			<textarea id="leaderInput" ng-model="question" autofocus
+			<textarea id="leaderInput" ng-model="lead.question" autofocus
 			placeholder="Please enter a prompt to be pushed to the group."></textarea>
 			<!--Controls for showing/hiding names, allowing/denying resubmission, and
 			showing/hiding content (e.g. for test/quiz answers to be revealed
 			simultaneously)-->
 			<div id="boxesAndButtons">
 				<div class="boxAndLabel">
-					<input type="checkbox" ng-model="noName">
+					<input type="checkbox" ng-model="lead.noName">
 					<span class="small">Hide names</span>
 				</div>
 				<div class="boxAndLabel">
-					<input type="checkbox" ng-model="noShow">
+					<input type="checkbox" ng-model="lead.noShow">
 					<span class="small">Hide answers</span>
 				</div>
 				<div class="boxAndLabel">
@@ -26,23 +26,23 @@
 					<span class="small">Disallow resubmits</span>
 				</div>
 				<!--Submission button for pushing questions-->
-				<button ng-click="pushQuestion()" id="pushQ" class="buttons"
+				<button ng-click="lead.pushQuestion()" id="pushQ" class="buttons"
 				ng-disabled="!question || (question === currentQ)">Submit</button>
 			</div>
 			<!--Dropdown containing history of previously submitted questions-->
 			<div class="styledDropdown">
 				<select class="submittedDropdown"
-				ng-model="history"
-				ng-init="history=allQuestions[0]"
-				ng-options="allQuestions[num] | limitTo:30
-				for (num, content) in allQuestions"
-				ng-change="resubmit()"></select>
+				ng-model="lead.history"
+				ng-init="lead.history=lead.allQuestions[0]"
+				ng-options="lead.allQuestions[num] | limitTo:30
+				for (num, content) in lead.allQuestions"
+				ng-change="lead.resubmit()"></select>
 			</div>
 	</section>
 	<!--Dividing line between header and main content-->
 	<div class="thinLine"></div>
 	<!--Wait message for main screen-->
-	<p ng-show="attendance === 0" class="large blue centered">&#60Waiting for participants to join&#62</p>
+	<p ng-show="lead.attendance === 0" class="large blue centered">&#60Waiting for participants to join&#62</p>
 	<!--Display section for participant answers-->
 	<section id="scratchpost" class="sortable">
 		<div ng-class="{userWindow:       true,
@@ -56,11 +56,11 @@
 										sevenToNineWin:   7 <= answersShown && answersShown <= 9,
 										tenToTwelveWin:   10 <= answersShown && answersShown <=12,
 										thirteenAndUpWin: answersShown > 12}"
-				 ng-repeat="(key, val) in participants"
+				 ng-repeat="(key, val) in lead.participants"
 				 ng-show="val.response !== '' || clean">
-			<span class="byline" ng-hide="noName">{{key}}</span>
-			<img src="img/close.png" ng-click="closeWindow(key)" class="closeWindow">
-			<pre class="content" contenteditable="true" ng-show="!noShow">{{val.response}}</pre>
+			<span class="byline" ng-hide="lead.noName">{{key}}</span>
+			<img src="img/close.png" ng-click="lead.closeUserWindow(key)" class="closeWindow">
+			<pre class="content" contenteditable="true" ng-show="!lead.noShow">{{val.response}}</pre>
 		</div>
 	</section>
 </div>

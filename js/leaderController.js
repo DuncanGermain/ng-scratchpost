@@ -1,69 +1,66 @@
-var scratchControllers = angular.module('scratchControllers', []);
-var ref = new Firebase('https://resplendent-fire-4150.firebaseio.com');
-var sessRef = ref.child('sessions');
-var sessID, //Session code as created by the leader
-		entryID, //Session code as entered by a participant
-		userID; //Username as entered by a participant
 
-scratchControllers.controller('LeaderControl', [
-	'$scope',
-	'$routeParams',
-	'$firebaseObject',
-	function($scope, $routeParams, $firebaseObject) {
-		//Draws the session code down from the global scope to make it available within the view
-		$scope.sessID = sessID;
-		//Ensures that Firebase empties when the session leader disconnects
-		var disconnectMe = sessRef.child(sessID);
-		disconnectMe.onDisconnect().remove();
-		//Creates quick references for the users, questions, and checkboxes within the session
-		var thisRef = sessRef.child(sessID);
-		var usersRef = thisRef.child('users');
-		var questRef = thisRef.child('questions');
-		var redoRef = thisRef.child('noRedo');
-		//Initializes variables to track questions and participants
-		$scope.asked = 0;
-		$scope.answersShown = 0; //Changes layout when session leader closes a user's window
-		$scope.clean = false //This is the "show a window for every user" variable
-		$scope.attendance = 0;
-		$scope.allQuestions = {0: 'Reload a previous question'};
-		$scope.history = false;
-		//Binds the noRedo checkbox back to the Firebase
-		$firebaseObject(thisRef).$bindTo($scope, 'thisRef');
-		//Keeps count of total participants
-		usersRef.on('child_added', function(snapshot) {
-			$scope.attendance++;
-			$scope.answersShown++;
-			$scope.$apply(); //Angular scope cleanup.
-		});
-		usersRef.on('child_removed', function(snapshot) {
-			$scope.attendance--;
-			$scope.answersShown--;
-			$scope.$apply(); //Angular scope cleanup.
-		});
-		//Binds a new participant's Firebase object to a div in the display area
-		$firebaseObject(usersRef).$bindTo($scope, 'participants');
-		//Pushes new questions up to Firebase
-		$scope.pushQuestion = function() {
-			$scope.asked++;
-			$scope.clean = true; //Setting clean to true brings back all user windows that were closed/hidden during debrief of the previous set of answers
-			$scope.currentQ = $scope.question;
-			$scope.answersShown = $scope.attendance;
-			//Assigns question content to a numbered key, and adds it to Firebase
-			var questObj = {};
-			questObj[$scope.asked] = $scope.currentQ;
-			questRef.update(questObj);
-		}
-		//Allows for storing/viewing/reloading of previous questions
-		questRef.on('child_added', function(snapshot) {
-			var updated = snapshot.val();
-			$scope.allQuestions[$scope.asked] = updated;
-		})
-		$scope.resubmit = function() {
-			$scope.question = $scope.history;
-		}
-		$scope.closeWindow = function(key) {
-			$scope.clean = false;
-			usersRef.child(key).child('response').set('');
-			$scope.answersShown--;
-		}
-	}]);
+scratchApp.leaderController = function($scope, $routeParams, $firebaseObject, SessionName) {
+	this.scope = $scope;
+	this.routeParams = $routeParams;
+	this.firebaseObject = $firebaseObject;
+	this.scope.SessionName = SessionName;
+	// Draws sessID down from the page to make it available to the template
+	var sessID = this.SessionName.sessID;
+	var	thisRef = sessRef.child(sessID),
+			usersRef = thisRef.child('users'),
+			questRef = thisRef.child('questions'),
+			redoRef = thisRef.child('noRedo');
+	// Removes the session object from Firebase when the leader navigates away
+	thisRef = sessRef.child(sessID);
+	thisRef.onDisconnect().remove();
+	// Variables to track questions and participants
+	this.asked = 0;
+	// For use in layout changes when session leader closes a user's window
+	this.answersShown = 0;
+	// This is the "show a window for every user" variable
+	this.clean = false;
+	this.attendance = 0;
+	this.allQuestions = {0: 'Reload a previous question'};
+	this.history = false;
+	// Binds the noRedo checkbox back to the Firebase
+	this.firebaseObject(thisRef).$bindTo(this.scope, 'thisRef');
+	// Binds a new participant's Firebase object to a div in the display area
+	this.firebaseObject(usersRef).$bindTo(this.scope, 'participants');
+	// Keeps count of total participants
+	usersRef.on('child_added', function(snapshot) {
+		this.attendance++;
+		this.answersShown++;
+		this.scope.$apply(); // Angular scope cleanup
+	});
+};
+var leaderController = scratchApp.leaderController;
+var sessRef = ref.child('sessions');
+
+scratchApp.leaderController.prototype.pushQuestion = function() {
+	this.asked++;
+	this.clean = true; // Setting clean to true brings back all user windows that were closed/hidden during debrief of the previous set of answers
+	this.currentQ = this.question;
+	this.answersShown = this.attendance;
+	// Assigns question content to a numbered key, and adds it to Firebase
+	var questObj = {};
+	questObj[this.asked] = this.currentQ;
+	questRef.update(questObj);
+	this.allQuestions[this.asked] = this.currentQ;
+	// Allows for storing/viewing/reloading of previous questions
+	// questRef.on('child_added', function(snapshot) {
+	// 	var updated = snapshot.val();
+	// 	this.allQuestions[this.asked] = updated;
+	// }.bind(this));
+}
+
+scratchApp.leaderController.prototype.resubmit = function() {
+	this.question = this.history;
+}
+
+scratchApp.leaderController.prototype.closeUserWindow = function(key) {
+	this.clean = false;
+	usersRef.child(key).child('response').set('');
+	this.answersShown--;
+}
+
+scratchApp.ngModule.controller('leaderController', scratchApp.leaderController);

@@ -1,3 +1,6 @@
+
+
+
 var scratchControllers = angular.module('scratchControllers', []);
 var ref = new Firebase('https://resplendent-fire-4150.firebaseio.com');
 var sessRef = ref.child('sessions');
