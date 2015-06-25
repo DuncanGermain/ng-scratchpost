@@ -3,7 +3,7 @@
 		<img id="logoSmall" src="img/logo.png">
 		<div id="leaderControls">
 			<div id="stats">
-				<span class="tiny">Session ID: {{lead.SessionName.sessID}}</span>
+				<span class="tiny">Session ID: {{lead.sessID}}</span>
 				<span class="tiny">Active participants: {{lead.attendance}}</span>
 			</div>
 			<!--Input for pushing questions to the users-->
@@ -27,7 +27,7 @@
 				</div>
 				<!--Submission button for pushing questions-->
 				<button ng-click="lead.pushQuestion()" id="pushQ" class="buttons"
-				ng-disabled="!question || (question === currentQ)">Submit</button>
+				ng-disabled="!lead.question || (lead.question === lead.currentQ)">Submit</button>
 			</div>
 			<!--Dropdown containing history of previously submitted questions-->
 			<div class="styledDropdown">
@@ -57,7 +57,7 @@
 										tenToTwelveWin:   10 <= answersShown && answersShown <=12,
 										thirteenAndUpWin: answersShown > 12}"
 				 ng-repeat="(key, val) in lead.participants"
-				 ng-show="val.response !== '' || clean">
+				 ng-show="val.response !== '' || showAll">
 			<span class="byline" ng-hide="lead.noName">{{key}}</span>
 			<img src="img/close.png" ng-click="lead.closeUserWindow(key)" class="closeWindow">
 			<pre class="content" contenteditable="true" ng-show="!lead.noShow">{{val.response}}</pre>

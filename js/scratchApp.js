@@ -38,3 +38,8 @@ scratchApp.ngModule.service('SessionName', function() {
 
 var ref = new Firebase('https://resplendent-fire-4150.firebaseio.com');
 var sessRef = ref.child('sessions');
+/* Shortcuts for navigating Firebase */
+var thisRef,
+		usersRef,
+		questRef,
+		redoRef;

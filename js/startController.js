@@ -84,7 +84,7 @@ scratchApp.startController.prototype.joinSession = function() {
 	var check = function() {
 		/* The variable deferred contains a 'this' call that would ordinarily do
 		something terrible/confusing. It gets bound to the startController instead
-		in the call on line **** and the bind on line ****. */
+		in the call on line 109 and the bind on line 126. */
 		var deferred = this.q.defer();
 		/* Sets up the promise object for the Firebase response */
 		sessRef.child(key).once('value', function(snapshot) {
