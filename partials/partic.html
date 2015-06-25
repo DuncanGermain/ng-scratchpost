@@ -4,18 +4,20 @@
 	<!--Dividing line between header and main content-->
 	<div class="thinLine"></div>
 	<!--Prompt and participant input-->
-	<div id="myPrompt">{{part.prompt}}</div>
-	<textarea id="myScratchpost" ng-model="part.myAnswer" autofocus placeholder="Type your answer here."></textarea>
-	<div id="buttonsAndHistory">
-		<!--Submission button for pushing answers-->
-		<button ng-click="part.pushAnswer()" id="pushQ" class="buttons"
-		ng-disabled="!part.myAnswer || (part.myAnswer === part.currentA)">Submit</button>
-		<!--Dropdown for history/resubmission-->
-		<div class="styledDropdown" id="playNice">
-				<select class="submittedDropdown"
-				ng-model="part.history"
-				ng-options="answer for answer in part.allAnswers | limitTo:30"
-				ng-change="part.resubmit()"></select>
+	<section class="userContainer">
+		<div id="myPrompt">{{part.prompt}}</div>
+		<textarea id="myScratchpost" ng-model="part.myAnswer" autofocus placeholder="Type your answer here."></textarea>
+		<div id="buttonsAndHistory">
+			<!--Submission button for pushing answers-->
+			<button ng-click="part.pushAnswer()" id="pushQ" class="buttons"
+			ng-disabled="!part.myAnswer || (part.myAnswer === part.currentA)">Submit</button>
+			<!--Dropdown for history/resubmission-->
+			<div class="styledDropdown" id="playNice">
+					<select class="submittedDropdown"
+					ng-model="part.history"
+					ng-options="answer for answer in part.allAnswers | limitTo:30"
+					ng-change="part.resubmit()"></select>
+			</div>
 		</div>
-	</div>
+	</section>
 </div>
