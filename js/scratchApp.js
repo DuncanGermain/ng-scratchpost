@@ -24,14 +24,21 @@ scratchApp.ngModule.config(function($routeProvider) {
 		});
 });
 
-scratchApp.ngModule.service('SessionName', function() {
+scratchApp.ngModule.service('SessionInfo', function() {
 	var sessID;
+	var userID;
 	return {
 		getSessionName: function() {
 			return sessID;
 		},
 		setSessionName: function(value) {
 			sessID = value;
+		},
+		getUserName: function() {
+			return userID;
+		},
+		setUserName: function(value) {
+			userID = value;
 		}
 	};
 });

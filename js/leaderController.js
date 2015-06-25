@@ -1,8 +1,8 @@
-scratchApp.leaderController = function($scope, $routeParams, $firebaseObject, SessionName) {
+scratchApp.leaderController = function($scope, $routeParams, $firebaseObject, SessionInfo) {
 	this.scope = $scope;
 	this.routeParams = $routeParams;
 	this.firebaseObject = $firebaseObject;
-	this.sessID = SessionName.getSessionName();
+	this.sessID = SessionInfo.getSessionName();
 	/* Shortcuts for navigating the Firebase */
 	thisRef = sessRef.child(this.sessID);
 	usersRef = thisRef.child('users');
@@ -13,19 +13,22 @@ scratchApp.leaderController = function($scope, $routeParams, $firebaseObject, Se
 	/* Binds the noRedo checkbox back to the Firebase */
 	this.firebaseObject(thisRef).$bindTo(this.scope, 'thisRef');
 	/* Binds a new participant's Firebase object to a div in the display area */
-	this.firebaseObject(usersRef).$bindTo(this.scope, 'participants');
+  this.participants = this.firebaseObject(usersRef);
 	/* Initializes variables to track questions and participants */
 	this.asked = 0; // Tracks total number of questions pushed
 	this.attendance = 0; // Tracks total number of participants
 	this.answersShown = 0; // Tracks participant windows currently being displayed
 	this.showAll = false; // Allows leader to close/hide participant windows
 	this.allQuestions = {0: 'Reload a previous question'}; // History dropdown
-	//this.history = false;  ??Dunno why this line was in the previous version
 	/* Keeps count of total participants */
 	usersRef.on('child_added', function(snapshot) {
 		this.attendance++;
 		this.answersShown++;
-	});
+	}.bind(this));
+	usersRef.on('child_removed', function(snapshot) {
+		this.attendance--;
+		this.answersShown--;
+	}.bind(this));
 };
 var leaderController = scratchApp.leaderController;
 

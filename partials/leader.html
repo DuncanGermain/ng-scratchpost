@@ -43,21 +43,22 @@
 	<div class="thinLine"></div>
 	<!--Wait message for main screen-->
 	<p ng-show="lead.attendance === 0" class="large blue centered">&#60Waiting for participants to join&#62</p>
+	{{lead.participants}}
 	<!--Display section for participant answers-->
 	<section id="scratchpost" class="sortable">
 		<div ng-class="{userWindow:       true,
 										animated:         true,
 										bounceIn:         true,
-										oneWin:           answersShown === 1,
-										twoWin:           answersShown === 2,
-										threeWin:         answersShown === 3,
-										fourWin:          answersShown === 4,
-										fiveToSixWin:     5 <= answersShown && answersShown <= 6,
-										sevenToNineWin:   7 <= answersShown && answersShown <= 9,
-										tenToTwelveWin:   10 <= answersShown && answersShown <=12,
-										thirteenAndUpWin: answersShown > 12}"
+										oneWin:           lead.answersShown === 1,
+										twoWin:           lead.answersShown === 2,
+										threeWin:         lead.answersShown === 3,
+										fourWin:          lead.answersShown === 4,
+										fiveToSixWin:     5 <= lead.answersShown && lead.answersShown <= 6,
+										sevenToNineWin:   7 <= lead.answersShown && lead.answersShown <= 9,
+										tenToTwelveWin:   10 <= lead.answersShown && lead.answersShown <=12,
+										thirteenAndUpWin: lead.answersShown > 12}"
 				 ng-repeat="(key, val) in lead.participants"
-				 ng-show="val.response !== '' || showAll">
+				 ng-show="val.response !== '' || lead.showAll">
 			<span class="byline" ng-hide="lead.noName">{{key}}</span>
 			<img src="img/close.png" ng-click="lead.closeUserWindow(key)" class="closeWindow">
 			<pre class="content" contenteditable="true" ng-show="!lead.noShow">{{val.response}}</pre>

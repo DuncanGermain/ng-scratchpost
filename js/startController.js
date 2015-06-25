@@ -1,14 +1,16 @@
-scratchApp.startController = function($scope, $routeParams, $firebaseObject, $location, SessionName, $q) {
+scratchApp.startController = function($scope, $routeParams, $firebaseObject, $location, SessionInfo, $q) {
 	this.scope = $scope;
 	this.routeParams = $routeParams;
 	this.firebaseObject = $firebaseObject;
 	this.location = $location;
-	this.getSessionName = function() {
-		return SessionName.getSessionName();
-	};
+	/* Tools for interacting with the SessionInfo service */
 	this.setSessionName = function(val) {
-		return SessionName.setSessionName(val);
+		return SessionInfo.setSessionName(val);
 	};
+	this.setUserName = function(val) {
+		return SessionInfo.setUserName(val);
+	};
+	/* $q is the Angular asynchronous service */
 	this.q = $q;
 	this.userState = "untouched";
 	this.sysMsg = '';
@@ -34,7 +36,7 @@ scratchApp.startController.prototype.startSession = function() {
 	var check = function() {
 		/* The variable deferred contains a 'this' call that would ordinarily do
 		something terrible/confusing. It gets bound to the startController instead
-		in the call on line 52 and the bind on line 72. */
+		in the call on line 54 and the bind on line 74. */
 		var deferred = this.q.defer();
 		/* Sets up the promise object for the Firebase response */
 		sessRef.child(entered).once('value', function(snapshot) {
@@ -84,7 +86,7 @@ scratchApp.startController.prototype.joinSession = function() {
 	var check = function() {
 		/* The variable deferred contains a 'this' call that would ordinarily do
 		something terrible/confusing. It gets bound to the startController instead
-		in the call on line 109 and the bind on line 126. */
+		in the call on line 111 and the bind on line 132. */
 		var deferred = this.q.defer();
 		/* Sets up the promise object for the Firebase response */
 		sessRef.child(key).once('value', function(snapshot) {
@@ -114,6 +116,10 @@ scratchApp.startController.prototype.joinSession = function() {
 			this.sysMsg = "Sorry, that username has already been taken for this \
 			session. Please choose another.";
 		} else {
+			/* Sets sessID and userID in the service so that they can be accessed by
+			other controllers and in other views */
+			this.setSessionName(key);
+			this.setUserName(entered);
 			/* Creates default object for a new user with the chosen username, and
 			adds it to Firebase */
 			var userObj = {};
