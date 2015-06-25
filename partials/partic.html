@@ -1,18 +1,18 @@
 <div ng-controller="particController as part">
 	<img id="logoPart" src="img/logo.png">
-	<span class="large blue centered">Welcome, {{part.userID}}.</span>
+	<span class="large blue centeredText">Welcome, {{part.userID}}.</span>
 	<!--Dividing line between header and main content-->
 	<div class="thinLine"></div>
 	<!--Prompt and participant input-->
 	<section class="userContainer">
-		<div id="myPrompt">{{part.prompt}}</div>
+		<textarea readonly id="myPrompt">{{part.prompt}}</textarea>
 		<textarea id="myScratchpost" ng-model="part.myAnswer" autofocus placeholder="Type your answer here."></textarea>
 		<div id="buttonsAndHistory">
 			<!--Submission button for pushing answers-->
 			<button ng-click="part.pushAnswer()" id="pushQ" class="buttons"
 			ng-disabled="!part.myAnswer || (part.myAnswer === part.currentA)">Submit</button>
 			<!--Dropdown for history/resubmission-->
-			<div class="styledDropdown" id="playNice">
+			<div class="styledDropdown" id="adjustedRight">
 					<select class="submittedDropdown"
 					ng-model="part.history"
 					ng-options="answer for answer in part.allAnswers | limitTo:30"

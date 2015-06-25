@@ -17,7 +17,7 @@
 	<section ng-switch-when="startingSession">
 		<form name="codeEntry" novalidate>
 			<p class="startInstructions">{{start.sysMsg}}</p>
-			<div class="centerMe">
+			<div class="centeredFormElements">
 				<input type="text" ng-model="start.desiredSessID" class="startField" placeholder="e.g. 'Eng 101'" required autofocus>
 				<input type="submit" ng-disabled="!start.desiredSessID" ng-click="start.startSession()" class="buttons startSubmit">
 			</div>
@@ -27,7 +27,7 @@
 	<section ng-switch-when="joiningSession">
 		<form name="codeEntry" novalidate>
 			<p class="startInstructions">{{start.sysMsg}}</p>
-			<div class="centerMe">
+			<div class="centeredFormElements">
 				<input type="text" ng-model="start.entryID" class="startField" placeholder="Session code" required autofocus>
 				<input type="text" ng-model="start.desiredUserID" class="startField" placeholder="Username" required>
 				<input type="submit" ng-disabled="!start.entryID || !start.desiredUserID" ng-click="start.joinSession()" class="buttons startSubmit">
