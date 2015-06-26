@@ -55,12 +55,14 @@
 										fiveToSixWin:     5 <= lead.answersShown && lead.answersShown <= 6,
 										sevenToNineWin:   7 <= lead.answersShown && lead.answersShown <= 9,
 										tenToTwelveWin:   10 <= lead.answersShown && lead.answersShown <=12,
-										thirteenAndUpWin: lead.answersShown > 12}"
+										thirteenAndUpWin: lead.answersShown > 12,
+										zoomed:						lead.zoomIndex==={{$index}}}"
 				 ng-repeat="(key, val) in lead.participants"
 				 ng-show="val.response !== '' || lead.showAll">
 			<div class="userWindowBylineAndButtons">
 				<span class="byline" ng-hide="lead.noName">{{key}}</span>
-				<img src="img/close.png" ng-click="lead.closeUserWindow(key)" class="closeWindow">
+				<img src="img/close.png" ng-click="lead.closeUserWindow(key)" class="windowIcon">
+				<img src="img/zoom.png" ng-click="lead.zoomUserWindow($index)" ng-model="lead.zoom[key]"class="windowIcon">
 			</div>
 			<textarea class="content" contenteditable="true" ng-show="!lead.noShow">{{val.response}}</textarea>
 		</div>

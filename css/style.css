@@ -147,11 +147,12 @@ input {
 	margin-top: 7px;
 	width: 100px; }
 #scratchpost {
+	position: relative;
 	display: block;
 	margin-top: 15px;
 	margin-bottom: 10px;
 	width: 100vw; }
-.closeWindow {
+.windowIcon {
 	display: inline-block;
 	float: right;
 	margin-right: 3px; }
@@ -246,25 +247,34 @@ input {
 	height: 29vh;
 	margin: 0vh 1vw 2vh 1vw; }
 .fourWin {
-	width: 46.5%;
+	width: 47%;
 	height: 46vh;
-	margin: 0vh 1vw 2vh 1vw; }
+	margin: 0vh .3vw 2vh .7vw; }
 .fiveToSixWin {
 	width: 30.3%;
 	height: 46vh;
-	margin: 0vh .75vw 2vh .75vw; }
+	margin: 0vh .5vw 2vh 1vw; }
 .sevenToNineWin {
 	width: 30.3%;
 	height: 30.3vh;
-	margin: 0vh .75vw 1.5vh .75vw; }
+	margin: 0vh .5vw 1.5vh 1vw; }
 .tenToTwelveWin {
 	width: 23%;
 	height: 30.3vh;
-	margin: 0vh .5vw 1.5vh .5vw; }
+	margin: 0vh .3vw 1.5vh .7vw; }
 .thirteenAndUpWin {
 	width: 23%;
 	height: 21.5vh;
-	margin: 0vh .5vw 1.5vh .5vw; }
+	margin: 0vh .3vw 1.5vh .7vw; }
+.zoomed {
+	position: relative;
+	width: 97%;
+	height: 95vh;
+	border: 7px solid #ffffa3;
+	-webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
 
 /* Webkit/gradients/animations (background, buttons, dropdowns, borderlines) */
 .background {

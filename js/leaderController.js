@@ -29,6 +29,8 @@ scratchApp.leaderController = function($scope, $routeParams, $firebaseObject, Se
 		this.attendance--;
 		this.answersShown--;
 	}.bind(this));
+	/* Variable allowing for the zoom of individual windows in the scratchpost */
+	this.zoomIndex = 999;
 };
 var leaderController = scratchApp.leaderController;
 
@@ -55,6 +57,14 @@ scratchApp.leaderController.prototype.closeUserWindow = function(key) {
 	this.showAll = false;
 	usersRef.child(key).child('response').set('');
 	this.answersShown--;
+}
+
+scratchApp.leaderController.prototype.zoomUserWindow = function(val) {
+	if (this.zoomIndex !== val) {
+		this.zoomIndex = val;
+	} else {
+		this.zoomIndex = 999;
+	}
 }
 
 scratchApp.ngModule.controller('leaderController', scratchApp.leaderController);
