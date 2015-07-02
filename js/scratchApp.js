@@ -27,19 +27,43 @@ scratchApp.ngModule.config(function($routeProvider) {
 scratchApp.ngModule.service('SessionInfo', function() {
 	var sessID;
 	var userID;
+	var newest;
 	return {
+		setSessionName: function(value) {
+			sessID = value;
+		},
 		getSessionName: function() {
 			return sessID;
 		},
-		setSessionName: function(value) {
-			sessID = value;
+		setUserName: function(value) {
+			userID = value;
 		},
 		getUserName: function() {
 			return userID;
 		},
-		setUserName: function(value) {
-			userID = value;
+		setNewest: function(value) {
+			newest = value;
+		},
+		getNewest: function() {
+			return newest;
 		}
+	};
+});
+
+/* Turns nested Firebase users object into an array of users, with each element
+in the array being a user object. This is to allow for randomization and
+reordering of user windows in the main display, which is much simpler when done
+with an array than when iterating over an object. */
+scratchApp.ngModule.filter('toArray', function() {
+	return function(obj) {
+		var result = [];
+		var isALegalName = /^(?!forEach)[ A-Za-z0-9]*$/;
+		angular.forEach(obj, function(val, key) {
+			if (isALegalName.test(key)) {
+				result.push(val);
+			}
+		});
+		return result;
 	};
 });
 

@@ -10,6 +10,9 @@ scratchApp.startController = function($scope, $routeParams, $firebaseObject, $lo
 	this.setUserName = function(val) {
 		return SessionInfo.setUserName(val);
 	};
+	this.setNewest = function(val) {
+		return SessionInfo.setNewest(val);
+	};
 	/* $q is the Angular asynchronous service */
 	this.q = $q;
 	this.userState = "untouched";
@@ -24,7 +27,7 @@ scratchApp.startController.prototype.goToStartSession = function() {
 
 scratchApp.startController.prototype.goToJoinSession = function() {
 	this.userState = "joiningSession";
-	this.sysMsg = "Please enter the session code and a username.";
+	this.sysMsg = "Please enter the session code and an alphanumeric username.";
 };
 
 scratchApp.startController.prototype.startSession = function() {
@@ -86,7 +89,7 @@ scratchApp.startController.prototype.joinSession = function() {
 	var check = function() {
 		/* The variable deferred contains a 'this' call that would ordinarily do
 		something terrible/confusing. It gets bound to the startController instead
-		in the call on line 111 and the bind on line 132. */
+		in the call on line 114 and the bind on line 158. */
 		var deferred = this.q.defer();
 		/* Sets up the promise object for the Firebase response */
 		sessRef.child(key).once('value', function(snapshot) {
@@ -109,23 +112,46 @@ scratchApp.startController.prototype.joinSession = function() {
 	/* Once Firebase responds, the user will either be prompted to try a different
 	session code or username, or have their data added to Firebase */
 	check.apply(this).then(function(result) {
+		var isALegalName = /^(?!forEach)[ A-Za-z0-9]*$/;
 		if (result === "Session not found") {
 			this.sysMsg = "Sorry, we can't find a session with that code. Please \
 			try again, or contact your session leader for help.";
+		} else if (!isALegalName.test(result)) {
+			this.sysMsg = "Sorry, that username contains illegal characters. Please \
+			use only letters, numbers, and spaces."
 		} else if (result === "Username not unique") {
 			this.sysMsg = "Sorry, that username has already been taken for this \
 			session. Please choose another.";
 		} else {
 			/* Sets sessID and userID in the service so that they can be accessed by
-			other controllers and in other views */
+			other controllers and in other views, and marks this user as the newest
+			user */
 			this.setSessionName(key);
 			this.setUserName(entered);
+			this.setNewest(entered);
 			/* Creates default object for a new user with the chosen username, and
 			adds it to Firebase */
 			var userObj = {};
-			var loggedIn = entered + ' has joined session ' + key + '.';
-			userObj[entered] = {response: loggedIn};
-			sessRef.child(key).child('users').update(userObj);
+			/* When transforming the nested Firebase user object into an array that
+			can be used and sorted by the ng-repeat directive, the key for each user
+			(which is the entered username) gets lost; hence, here it's added as a
+			redundant property on the object itself. A more experienced coder may be
+			able to help me reduce the need for this redundancy. FIX IN V.4! */
+			userObj['name'] = entered;
+			var loggedInMsg = entered + ' has joined session ' + key + '.';
+			userObj['response'] = loggedInMsg;
+			/* When attempting to make the order of the participant windows sortable
+			and randomizable, I found that I needed some numerical attribute on each
+			user that could be manipulated. The easiest way was to put the attribute
+			directly on the user object, as below. This allows it to be updated along
+			with (and in response to) questions and responses. However, it seems to
+			me that there should be a more elegant way that does not require pushing
+			information up to Firebase, since this data is only relevant to the DOM
+			of the leader page. FIX IN V.4! */
+			var displayOrder = Math.floor(Math.random()*10000000);
+			userObj['rank'] = displayOrder;
+			/* Adds the new userObj to Firebase */
+			sessRef.child(key).child('users').child(entered).set(userObj);
 			/* Navigates to participant page */
 			this.location.path('/partic');
 		}

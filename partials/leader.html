@@ -45,26 +45,34 @@
 	<span ng-show="lead.attendance === 0" class="large blue centeredText">&#60Waiting for participants to join&#62</span>
 	<!--Display section for participant answers-->
 	<section id="scratchpost" class="sortable">
-		<div ng-class="{userWindow:       true,
-										animated:         true,
-										bounceIn:         true,
-										oneWin:           lead.answersShown === 1,
-										twoWin:           lead.answersShown === 2,
-										threeWin:         lead.answersShown === 3,
-										fourWin:          lead.answersShown === 4,
-										fiveToSixWin:     5 <= lead.answersShown && lead.answersShown <= 6,
-										sevenToNineWin:   7 <= lead.answersShown && lead.answersShown <= 9,
-										tenToTwelveWin:   10 <= lead.answersShown && lead.answersShown <=12,
-										thirteenAndUpWin: lead.answersShown > 12,
+		<div ng-repeat="person in lead.participants | toArray | orderBy:'rank'"
+				 ng-class="{userWindow:       true,
+										animated:         lead.showAll || lead.newest==={{person.name}},
+										bounceIn:         lead.showAll || lead.newest==={{person.name}},
+										oneWin:           lead.answersShown===1,
+										twoWin:           lead.answersShown===2,
+										threeWin:         lead.answersShown===3,
+										fourWin:          lead.answersShown===4,
+										fiveToSixWin:     5<=lead.answersShown && lead.answersShown<=6,
+										sevenToNineWin:   7<=lead.answersShown && lead.answersShown<=9,
+										tenToTwelveWin:   10<=lead.answersShown && lead.answersShown<=12,
+										thirteenAndUpWin: lead.answersShown>12,
 										zoomed:						lead.zoomIndex==={{$index}}}"
-				 ng-repeat="(key, val) in lead.participants"
-				 ng-show="val.response !== '' || lead.showAll">
+				 ng-show="person.response !== '' || lead.showAll">
 			<div class="userWindowBylineAndButtons">
-				<span class="byline" ng-hide="lead.noName">{{key}}</span>
-				<img src="img/close.png" ng-click="lead.closeUserWindow(key)" class="windowIcon">
-				<img src="img/zoom.png" ng-click="lead.zoomUserWindow($index)" ng-model="lead.zoom[key]"class="windowIcon">
+				<span class="byline" ng-hide="lead.noName">{{person.name}}</span>
+				<img src="img/close.png" ng-click="lead.closeUserWindow(person.name)" class="windowIcon">
+				<img src="img/zoom.png" ng-click="lead.zoomUserWindow($index)" ng-model="lead.zoom[key]" class="windowIcon">
+				<img src="img/move.png" class="windowIcon">
 			</div>
-			<textarea class="content" contenteditable="true" ng-show="!lead.noShow">{{val.response}}</textarea>
+			<textarea ng-class="{content:   true,
+													 textQuart: 10<=lead.answersShown,
+													 textThird: 5<=lead.answersShown && lead.answersShown<=9,
+													 textHalf:  lead.answersShown===4,
+													 textFull:  lead.answersShown<=3,
+													 textZoom:  lead.zoomIndex==={{$index}}}"
+								contenteditable="true"
+								ng-show="!lead.noShow">{{person.response}}</textarea>
 		</div>
 	</section>
 </div>
