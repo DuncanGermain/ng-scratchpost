@@ -9,17 +9,31 @@ scratchApp.particController = function($scope, $routeParams, $firebaseObject, Se
 	questRef = thisRef.child('questions');
 	redoRef = thisRef.child('noRedo');
 	meRef = thisRef.child('users').child(this.userID);
+	/* Binds the noRedo scope value back to the checkbox on the leader page */
+	this.noRedo = this.firebaseObject(redoRef);
 	/* Removes the user object from Firebase when the user navigates away */
 	meRef.onDisconnect().remove();
 	/* Initializes variables to track answers */
 	this.prompt = "You have joined session " + this.sessID +
 	".\n\nPlease wait for your session leader to submit a prompt.";
+	this.hasAnswered = false;
+	this.closedByLeader = false;
 	this.allAnswers = ['Reload a previous answer'];
 	this.history = this.allAnswers[0];
 	/* Pulls questions down from Firebase */
 	questRef.on('child_added', function(snapshot) {
 		var updated = snapshot.val();
 		this.prompt = updated;
+		this.hasAnswered = false;
+		this.closedByLeader = false;
+		this.scope.$apply();
+	}.bind(this));
+	/* Notices if the leader has closed the user's window on the leader page */
+	meRef.on('child_changed', function(snapshot) {
+		var data = snapshot.val();
+		if (data==="cLoSeDbYlEaDeR") {
+			this.closedByLeader = true;
+		}
 		this.scope.$apply();
 	}.bind(this));
 }
@@ -31,6 +45,7 @@ scratchApp.particController.prototype.pushAnswer = function() {
 	meRef.child('response').set(this.currentA);
 	/* Updates in-page record of answers for dropdown */
 	this.allAnswers.push(this.currentA);
+	this.hasAnswered = true;
 }
 
 scratchApp.particController.prototype.resubmit = function() {

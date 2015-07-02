@@ -288,6 +288,13 @@ input {
 	min-width: 320px;
 	margin-left: auto;
 	margin-right: auto; }
+.userInstructions {
+	margin: 10px 0px 10px 0px;
+	text-align: center;
+	font-family: "Ubuntu", sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #ebebeb; }
 #myPrompt {
 	font-family: "Source Code Pro";
 	white-space: pre-wrap;

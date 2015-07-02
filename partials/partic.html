@@ -5,12 +5,28 @@
 	<div class="thinLine"></div>
 	<!--Prompt and participant input-->
 	<section class="userContainer">
+		<div id="userInstructionsContainer" ng-show="part.noRedo['$value'] || part.closedByLeader===true">
+			<p ng-show="part.hasAnswered===false" class="userInstructions">
+				Warning!<br>
+				No resubmissions allowed.
+			</p>
+			<p ng-show="part.hasAnswered===true && part.closedByLeader!==true" class="userInstructions">
+				Thank you for your submission.<br>
+				Please wait for your next prompt.
+			</p>
+			<p ng-show="part.closedByLeader===true" class="userInstructions">
+				Your window has been closed by the session leader.<br>
+				Please wait for your next prompt.
+			</p>
+		</div>
 		<textarea readonly id="myPrompt">{{part.prompt}}</textarea>
 		<textarea id="myScratchpost" ng-model="part.myAnswer" autofocus placeholder="Type your answer here."></textarea>
 		<div id="buttonsAndHistory">
 			<!--Submission button for pushing answers-->
 			<button ng-click="part.pushAnswer()" id="pushQ" class="buttons"
-			ng-disabled="!part.myAnswer || (part.myAnswer === part.currentA)">Submit</button>
+			ng-disabled="!part.myAnswer ||
+										part.myAnswer===part.currentA ||
+										part.noRedo['$value'] && part.hasAnswered===true">Submit</button>
 			<!--Dropdown for history/resubmission-->
 			<div class="styledDropdown" id="adjustedRight">
 					<select class="submittedDropdown"

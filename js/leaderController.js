@@ -73,7 +73,7 @@ scratchApp.leaderController.prototype.resubmit = function() {
 
 scratchApp.leaderController.prototype.closeUserWindow = function(name) {
 	this.showAll = false;
-	usersRef.child(name).child('response').set('');
+	usersRef.child(name).child('response').set('cLoSeDbYlEaDeR');
 	this.answersShown--;
 }
 
@@ -83,6 +83,10 @@ scratchApp.leaderController.prototype.zoomUserWindow = function(val) {
 	} else {
 		this.zoomIndex = 999;
 	}
+}
+
+scratchApp.leaderController.prototype.moveUserWindow = function(val) {
+	alert("You have attempted to use the 'move' feature, which has not yet been implemented.");
 }
 
 scratchApp.ngModule.controller('leaderController', scratchApp.leaderController);

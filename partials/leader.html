@@ -47,8 +47,8 @@
 	<section id="scratchpost" class="sortable">
 		<div ng-repeat="person in lead.participants | toArray | orderBy:'rank'"
 				 ng-class="{userWindow:       true,
-										animated:         lead.showAll || lead.newest==={{person.name}},
-										bounceIn:         lead.showAll || lead.newest==={{person.name}},
+										animated:         true,
+										bounceIn:         true,
 										oneWin:           lead.answersShown===1,
 										twoWin:           lead.answersShown===2,
 										threeWin:         lead.answersShown===3,
@@ -58,12 +58,12 @@
 										tenToTwelveWin:   10<=lead.answersShown && lead.answersShown<=12,
 										thirteenAndUpWin: lead.answersShown>12,
 										zoomed:						lead.zoomIndex==={{$index}}}"
-				 ng-show="person.response !== '' || lead.showAll">
+				 ng-show="person.response !== 'cLoSeDbYlEaDeR' || lead.showAll">
 			<div class="userWindowBylineAndButtons">
 				<span class="byline" ng-hide="lead.noName">{{person.name}}</span>
 				<img src="img/close.png" ng-click="lead.closeUserWindow(person.name)" class="windowIcon">
-				<img src="img/zoom.png" ng-click="lead.zoomUserWindow($index)" ng-model="lead.zoom[key]" class="windowIcon">
-				<img src="img/move.png" class="windowIcon">
+				<img src="img/zoom.png" ng-click="lead.zoomUserWindow($index)" class="windowIcon">
+				<img src="img/move.png" ng-click="lead.moveUserWindow($index)" class="windowIcon">
 			</div>
 			<textarea ng-class="{content:   true,
 													 textQuart: 10<=lead.answersShown,
@@ -76,6 +76,8 @@
 		</div>
 	</section>
 </div>
+
+<!--lead.showAll || lead.newest==={{person.name}}-->
 
 
 
