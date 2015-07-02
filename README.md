@@ -5,7 +5,7 @@ Concept: Conor Moreton (2009) <br>
 Original design: Stephanie Zolayvar (2009) <br>
 ver 2.0: scratchpost.herokuapp.com/index.html <br>
 2.0 design: Conor Moreton, Matthew McClure, Nathan O'Brien (Jan 2015), with assistance from CodeFellows <br>
-3.0 design: Conor Moreton (May 2015), with assistance from Stephanie Zolayvar <br>
+3.0 design: Conor Moreton (May 2015) <br>
 
 Workflow:
  - The SESSION LEADER initiates a session by creating a session code.
@@ -15,11 +15,17 @@ Workflow:
  - The participants enter their responses, which then appear in their respective windows on the main page.
  - The session leader then interacts with those answers as part of the broader lecture or discussion.
 
-Features:
- - Participant windows auto-resize based upon the number of participants
- - Participant windows may be dragged, deleted, or edited by the session leader
+Current features:
+ - Participant windows auto-resize based upon the number of participants and the size of the browser window
+ - Participant windows may be deleted or edited by the session leader
+ - A given participant window may be zoomed by the session leader
  - Participant responses can be fully anonymous using the "hide names" feature (participant windows reshuffle position automatically with each new question)
  - Participants can be limited to a single response, or allowed infinite resubmissions (e.g. quiz response vs. continual feedback during a lecture)
  - Participants' answers can be hidden either during or after submission (e.g. if an instructor wants to reveal all answers at once rather than letting the stragglers look at/use the first responses to be submitted)
+
+Future features:
+ - Animations connected to participant window appearances, deletions, and zoom
+ - Draggable participant windows, such that responses may be compared side-by-side
+ - Toggle in-line formatting (each answer on its own line) rather than square-ish windows (for long, linear responses)
  - PDF printout of current state at any time (current prompt, and a list of {user: response} pairs) to "save" data
 
