@@ -1,24 +1,24 @@
-<div ng-controller="LeaderControl">
-	<section class="full header">
+<div ng-controller="leaderController as lead">
+	<section class="header">
 		<img id="logoSmall" src="img/logo.png">
 		<div id="leaderControls">
 			<div id="stats">
-				<span class="tiny">Session ID: {{sessID}}</span>
-				<span class="tiny">Active participants: {{attendance}}</span>
+				<span class="tiny">Session ID: {{lead.sessID}}</span>
+				<span class="tiny">Active participants: {{lead.attendance}}</span>
 			</div>
 			<!--Input for pushing questions to the users-->
-			<textarea id="leaderInput" ng-model="question" autofocus
+			<textarea id="leaderInput" ng-model="lead.question" autofocus
 			placeholder="Please enter a prompt to be pushed to the group."></textarea>
 			<!--Controls for showing/hiding names, allowing/denying resubmission, and
 			showing/hiding content (e.g. for test/quiz answers to be revealed
 			simultaneously)-->
 			<div id="boxesAndButtons">
 				<div class="boxAndLabel">
-					<input type="checkbox" ng-model="noName">
+					<input type="checkbox" ng-model="lead.noName">
 					<span class="small">Hide names</span>
 				</div>
 				<div class="boxAndLabel">
-					<input type="checkbox" ng-model="noShow">
+					<input type="checkbox" ng-model="lead.noShow">
 					<span class="small">Hide answers</span>
 				</div>
 				<div class="boxAndLabel">
@@ -26,44 +26,58 @@
 					<span class="small">Disallow resubmits</span>
 				</div>
 				<!--Submission button for pushing questions-->
-				<button ng-click="pushQuestion()" id="pushQ" class="buttons"
-				ng-disabled="!question || (question === currentQ)">Submit</button>
+				<button ng-click="lead.pushQuestion()" id="pushQ" class="buttons"
+				ng-disabled="!lead.question || (lead.question === lead.currentQ)">Submit</button>
 			</div>
 			<!--Dropdown containing history of previously submitted questions-->
 			<div class="styledDropdown">
 				<select class="submittedDropdown"
-				ng-model="history"
-				ng-init="history=allQuestions[0]"
-				ng-options="allQuestions[num] | limitTo:30
-				for (num, content) in allQuestions"
-				ng-change="resubmit()"></select>
+				ng-model="lead.history"
+				ng-init="lead.history=lead.allQuestions[0]"
+				ng-options="lead.allQuestions[num] | limitTo:30
+				for (num, content) in lead.allQuestions"
+				ng-change="lead.resubmit()"></select>
 			</div>
 	</section>
 	<!--Dividing line between header and main content-->
 	<div class="thinLine"></div>
 	<!--Wait message for main screen-->
-	<p ng-show="attendance === 0" class="large blue centered">&#60Waiting for participants to join&#62</p>
+	<span ng-show="lead.attendance === 0" class="large blue centeredText">&#60Waiting for participants to join&#62</span>
 	<!--Display section for participant answers-->
 	<section id="scratchpost" class="sortable">
-		<div ng-class="{userWindow:       true,
+		<div ng-repeat="person in lead.participants | toArray | orderBy:'rank'"
+				 ng-class="{userWindow:       true,
 										animated:         true,
 										bounceIn:         true,
-										oneWin:           answersShown === 1,
-										twoWin:           answersShown === 2,
-										threeWin:         answersShown === 3,
-										fourWin:          answersShown === 4,
-										fiveToSixWin:     5 <= answersShown && answersShown <= 6,
-										sevenToNineWin:   7 <= answersShown && answersShown <= 9,
-										tenToTwelveWin:   10 <= answersShown && answersShown <=12,
-										thirteenAndUpWin: answersShown > 12}"
-				 ng-repeat="(key, val) in participants"
-				 ng-show="val.response !== '' || clean">
-			<span class="byline" ng-hide="noName">{{key}}</span>
-			<img src="img/close.png" ng-click="closeWindow(key)" class="closeWindow">
-			<pre class="content" contenteditable="true" ng-show="!noShow">{{val.response}}</pre>
+										oneWin:           lead.answersShown===1,
+										twoWin:           lead.answersShown===2,
+										threeWin:         lead.answersShown===3,
+										fourWin:          lead.answersShown===4,
+										fiveToSixWin:     5<=lead.answersShown && lead.answersShown<=6,
+										sevenToNineWin:   7<=lead.answersShown && lead.answersShown<=9,
+										tenToTwelveWin:   10<=lead.answersShown && lead.answersShown<=12,
+										thirteenAndUpWin: lead.answersShown>12,
+										zoomed:						lead.zoomIndex==={{$index}}}"
+				 ng-show="person.response !== 'cLoSeDbYlEaDeR' || lead.showAll">
+			<div class="userWindowBylineAndButtons">
+				<span class="byline" ng-hide="lead.noName">{{person.name}}</span>
+				<img src="img/close.png" ng-click="lead.closeUserWindow(person.name)" class="windowIcon">
+				<img src="img/zoom.png" ng-click="lead.zoomUserWindow($index)" class="windowIcon">
+				<img src="img/move.png" ng-click="lead.moveUserWindow($index)" class="windowIcon">
+			</div>
+			<textarea ng-class="{content:   true,
+													 textQuart: 10<=lead.answersShown,
+													 textThird: 5<=lead.answersShown && lead.answersShown<=9,
+													 textHalf:  lead.answersShown===4,
+													 textFull:  lead.answersShown<=3,
+													 textZoom:  lead.zoomIndex==={{$index}}}"
+								contenteditable="true"
+								ng-show="!lead.noShow">{{person.response}}</textarea>
 		</div>
 	</section>
 </div>
+
+<!--lead.showAll || lead.newest==={{person.name}}-->
 
 
 

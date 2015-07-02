@@ -1,3 +1,49 @@
+/* Font formatting ---------------------------------------------------------- */
+textarea {
+	font-family: "Source Code Pro";
+	white-space: pre-wrap;
+	word-wrap: normal;
+	word-break: keep-all;
+	color: #4f4f4f;
+	resize: none; }
+textarea:active {
+	border: none; }
+input {
+	font-family: "Source Code Pro";
+	font-size: 10pt;
+	color: #4f4f4f;
+	padding-left: 5px; }
+.large {
+	font-family: "Ubuntu";
+	font-weight: 700;
+	font-size: 24pt;
+	text-shadow: 2px 2px #4f4f4f; }
+.small {
+	font-family: "Ubuntu";
+	font-weight: 400;
+	font-size: 10pt;
+	color: #ebebeb;
+	margin-right: 20px; }
+.tiny {
+	font-family: "Ubuntu";
+	font-weight: 300;
+	font-size: 8pt;
+	color: #ebebeb;
+	margin-right: 20px; }
+.centeredText {
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px; }
+
+/* Shorthand color labels --------------------------------------------------- */
+.green {
+	color: #97FF93; }
+.blue {
+	color: #A0DAFF; }
+
+/* Webkit/gradients/animations (background, buttons, dropdowns, borderlines) */
 .background {
 	width:100%;
 	background-image: -ms-radial-gradient(center, ellipse closest-corner, #808080 0%, #474747 100%);
@@ -5,9 +51,7 @@
 	background-image: -o-radial-gradient(center, ellipse closest-corner, #808080 0%, #474747 100%);
 	background-image: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, #808080), color-stop(1, #474747));
 	background-image: -webkit-radial-gradient(center, ellipse closest-corner, #808080 0%, #474747 100%);
-	background-image: radial-gradient(ellipse closest-corner at center, #808080 0%, #474747 100%);
-}
-
+	background-image: radial-gradient(ellipse closest-corner at center, #808080 0%, #474747 100%); }
 .buttons {
 	border:1px solid #d4d4d4;
 	-webkit-border-radius: 3px;
@@ -25,9 +69,7 @@
  	background-image: -ms-linear-gradient(top, #F0F0F0, #CDCDCD);
  	background-image: -o-linear-gradient(top, #F0F0F0, #CDCDCD);
  	background-image: linear-gradient(to bottom, #F0F0F0, #CDCDCD);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#CDCDCD);
- 	box-shadow: 2px 2px 5px #3d3d3d;
-}
-
+ 	box-shadow: 2px 2px 5px #3d3d3d; }
 .buttons:hover {
  background-color: #F7F7F7;
  background-image: -webkit-gradient(linear, left top, left bottom, from(#F7F7F7), to(#e0e0e0));
@@ -35,15 +77,11 @@
  background-image: -moz-linear-gradient(top, #F7F7F7, #e0e0e0);
  background-image: -ms-linear-gradient(top, #F7F7F7, #e0e0e0);
  background-image: -o-linear-gradient(top, #F7F7F7, #e0e0e0);
- background-image: linear-gradient(to bottom, #F7F7F7, #e0e0e0);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F7F7F7, endColorstr=#e0e0e0);
-}
-
+ background-image: linear-gradient(to bottom, #F7F7F7, #e0e0e0);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F7F7F7, endColorstr=#e0e0e0); }
 .buttons:active {
 	margin-top: 1px;
 	-webkit-transform: translateY(1px);
-  transform: translateY(1px);
-}
-
+  transform: translateY(1px); }
 .buttons:disabled {
 	background-color: #F0F0F0;
  	background-image: -webkit-gradient(linear, left top, left bottom, from(#F0F0F0), to(#CDCDCD));
@@ -53,9 +91,7 @@
  	background-image: -o-linear-gradient(top, #F0F0F0, #CDCDCD);
  	background-image: linear-gradient(to bottom, #F0F0F0, #CDCDCD);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#CDCDCD);
  	box-shadow: none;
- 	color: #c0c0c0;
-}
-
+ 	color: #c0c0c0; }
 .thinLine {
 	height: 2px;
 	width: 95%;
@@ -66,79 +102,11 @@
   background: -o-linear-gradient(left,  rgba(79,79,79,0) 0%,rgba(235,235,235,1) 17%,rgba(235,235,235,1) 83%,rgba(79,79,79,0) 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(left,  rgba(79,79,79,0) 0%,rgba(235,235,235,1) 17%,rgba(235,235,235,1) 83%,rgba(79,79,79,0) 100%); /* IE10+ */
   background: linear-gradient(to right,  rgba(79,79,79,0) 0%,rgba(235,235,235,1) 17%,rgba(235,235,235,1) 83%,rgba(79,79,79,0) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004f4f4f', endColorstr='#004f4f4f',GradientType=1 ); /* IE6-9 */
-}
-
-.startField {
-	height: 34px;
-	width: 143px;
-	vertical-align: middle;
-	border-radius: 3px;
-	box-shadow: inset 1px 1px 2px 0 #e0e0e0;
- 	box-shadow: 2px 2px 5px #3d3d3d;
-}
-
-
-p {
-	font-family: "Ubuntu", sans-serif;
-	font-weight: 400;
-	font-size: 12pt;
-	color: #ebebeb;
-}
-
-textarea {
-	font-family: "Source Code Pro";
-	white-space: pre-wrap;
-	color: #4f4f4f;
-}
-
-.large {
-	font-family: "Ubuntu";
-	font-weight: 700;
-	font-size: 24pt;
-	text-shadow: 2px 2px #4f4f4f;
-}
-
-.small {
-	font-family: "Ubuntu";
-	font-weight: 400;
-	font-size: 10pt;
-	color: #ebebeb;
-	margin-right: 20px;
-}
-
-.tiny {
-	font-family: "Ubuntu";
-	font-weight: 300;
-	font-size: 8pt;
-	color: #ebebeb;
-	margin-right: 20px;
-}
-
-.byline {
-	font-family: "Ubuntu";
-	font-weight: 300;
-	font-size: 8pt;
-	color: #4f4f4f;
-	vertical-align: top;
-}
-
-.closeWindow {
-	display: inline-block;
-}
-
-input {
-	font-family: "Source Code Pro";
-	font-size: 10pt;
-	color: #4f4f4f;
-	padding-left: 5px;
-}
-
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004f4f4f', endColorstr='#004f4f4f',GradientType=1 ); /* IE6-9 */ }
 .styledDropdown {
-	margin-top: 5px;
-}
-
+	margin-top: 5px; }
 .submittedDropdown {
+	display: inline-block;
   width: 308px;
   height: 20px;
   overflow: hidden;
@@ -149,8 +117,7 @@ input {
  	background-image: -ms-linear-gradient(top, #F0F0F0, #CDCDCD);
  	background-image: -o-linear-gradient(top, #F0F0F0, #CDCDCD);
  	background-image: linear-gradient(to bottom, #F0F0F0, #CDCDCD);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F0F0F0, endColorstr=#CDCDCD);
-  border: 1px solid #ccc;
-}
+  border: 1px solid #ccc; }
 .submittedDropdown select {
   background: transparent;
   width: 308px;
@@ -162,22 +129,255 @@ input {
   border: 0;
   border-radius: 0;
   height: 20px;
-  -webkit-appearance: none;
-}
-
+  -webkit-appearance: none; }
 .submittedDropdown select option {
+	color: #4f4f4f; }
+
+/* Logo image styling ------------------------------------------------------- */
+#logoMain {
+	display: block;
+	max-height: 256px;
+	max-width: 280px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 60px;
+	margin-bottom: 30px; }
+#logoSmall {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	height: 144px;
+	width: 157px;
+	margin: 15px 15px 15px 0px; }
+#logoPart {
+	display: block;
+	height: 144px;
+	width: 157px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px; }
+
+/* Start page elements ------------------------------------------------------ */
+.startInstructions {
+	margin-top: 38px;
+	text-align: center;
+	font-family: "Ubuntu", sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #ebebeb; }
+.startButtons {
+	min-width: 220px;
+	vertical-align: middle;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1px;
+	margin-bottom: 10px; }
+.startButtonText {
+	position: relative;
+	top: -3px;
+	font-size: 16px;
+	margin-left: 4px;
+	margin-right: 4px; }
+.startButtonImg {
+	margin-top: 2px;
+	margin-left: 4px; }
+.centeredFormElements {
+	width: 223px;
+	margin-top: 5px;
+	margin-left: auto;
+	margin-right: auto; }
+.startField {
+	margin-top: 3px;
+	height: 34px;
+	width: 143px;
+	vertical-align: middle;
+	border-radius: 3px;
+	box-shadow: inset 1px 1px 2px 0 #e0e0e0;
+ 	box-shadow: 2px 2px 5px #3d3d3d; }
+.startSubmit {
+	width: 70px;
+	height: 34px;
+	display: table-cell;
+	vertical-align: middle;
+	margin-left: 5px;
+	margin-top: 3px;
+	font-size: 16px;
+	text-decoration: none; }
+
+/* Leader page elements ----------------------------------------------------- */
+.header {
+	height: 174px;
+	width: 95%;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	min-width: 960px; }
+#leaderControls {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	height: 144px;
+	min-width: 700px;
+	margin: 15px 0px 15px 15px; }
+#leaderInput {
+	display: inline-block;
+	position: relative;
+	height: 90px;
+	width: 550px;
+	resize: none;
+	padding-left: 5px; }
+#boxesAndButtons {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	height: 90px;
+	margin-left: 10px; }
+#stats {
+	display: block;
+	margin-bottom: 3px; }
+#pushQ {
+	margin-top: 7px;
+	width: 100px; }
+#scratchpost {
+	position: relative;
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	width: 100vw; }
+.userWindow {
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	word-break: keep-all;
+	background-color: white;
+	border: 5px solid #97FF93;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px #4f4f4f; }
+.windowIcon {
+	display: inline-block;
+	float: right;
+	margin-right: 3px; }
+.byline {
+	margin: 3px 0px 0px 5px;
+	font-family: "Ubuntu";
+	font-weight: 300;
+	font-size: 8pt;
 	color: #4f4f4f;
-}
+	vertical-align: top; }
+.userWindowBylineAndButtons {
+	display: block;
+	padding-top: 3px;
+	width: 100%;
+	height: 21px;
+	position: absolute;
+	background-color: white;
+	z-index: 3; }
+.content {
+	position: absolute;
+	z-index: 2;
+	padding: 20px 5px 0px 5px;
+	border: none;
+	width: 100%;
+	height: 100%; }
 
-.green {
-	color: #97FF93;
-}
+/* Participant page elements ------------------------------------------------ */
+#particControls {
+	height: 242px; }
+.userContainer {
+	width: 50%;
+	min-width: 320px;
+	margin-left: auto;
+	margin-right: auto; }
+.userInstructions {
+	margin: 10px 0px 10px 0px;
+	text-align: center;
+	font-family: "Ubuntu", sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #ebebeb; }
+#myPrompt {
+	font-family: "Source Code Pro";
+	white-space: pre-wrap;
+	word-wrap: normal;
+	overflow: scroll;
+	color: #4f4f4f;
+	height: 106px;
+	width: 100%;
+	padding: 5px 9px 5px 9px;
+	margin: 5px auto 5px auto;
+	background-color: white;
+	border: 5px solid #A0DAFF;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px #4f4f4f; }
+#myScratchpost {
+	display: block;
+	padding: 5px 9px 5px 9px;
+	height: 212px;
+	width: 100%;
+	margin: 10px auto 10px auto;
+	background-color: white;
+	word-wrap: normal;
+	overflow: scroll;
+	border: 5px solid #97FF93;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px #4f4f4f; }
+#buttonsAndHistory {
+	width: 428px;
+	margin: 5px auto 5px auto;
+	height: 150px; }
+#adjustedRight {
+	display: inline-block;
+	margin-left: 15px; }
 
-.yellow {
-	color: #FFFFA3;
-}
-
-.blue {
-	color: #A0DAFF;
-}
-
+/* Classes for auto-resizing of user windows -------------------------------- */
+.oneWin {
+	width: 97%;
+	height: 95vh;
+	margin: 1vh 1vw 1vh 1vw; }
+.twoWin {
+	width: 97%;
+	height: 47vh;
+	margin: 0vh 1vw 2vh 1vw; }
+.threeWin {
+	width: 97%;
+	height: 29vh;
+	margin: 0vh 1vw 2vh 1vw; }
+.fourWin {
+	width: 47%;
+	height: 46vh;
+	margin: 0vh .3vw 2vh .7vw; }
+.fiveToSixWin {
+	width: 30.3%;
+	height: 46vh;
+	margin: 0vh .5vw 2vh 1vw; }
+.sevenToNineWin {
+	width: 30.3%;
+	height: 30.3vh;
+	margin: 0vh .5vw 1.5vh 1vw; }
+.tenToTwelveWin {
+	width: 23%;
+	height: 30.3vh;
+	margin: 0vh .3vw 1.5vh .7vw; }
+.thirteenAndUpWin {
+	width: 23%;
+	height: 21.5vh;
+	margin: 0vh .3vw 1.5vh .7vw; }
+.zoomed {
+	position: absolute;
+	width: 93%;
+	height: 95vh;
+	top: 2vh;
+	left: 1vw;
+	z-index: 100;
+	border: 7px solid #ffffa3;
+	box-shadow: 0px 0px 3px 3px #4f4f4f; }
+.textQuart {
+	font-size: 14pt; }
+.textThird {
+	font-size: 18pt; }
+.textHalf {
+	font-size: 26pt; }
+.textFull {
+	font-size: 36pt; }
+.textZoom {
+	font-size: 40pt; }

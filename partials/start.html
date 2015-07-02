@@ -1,36 +1,36 @@
 <header>
 	<img id="logoMain" src="img/logo.png">
 </header>
-<div ng-controller="StartControl">
+<div ng-controller="startController as start" ng-switch="start.userState">
 	<!--Logo and buttons for landing page-->
-	<section ng-show="startButtons">
-		<button ng-click="newSess()" class="buttons startButtons">
+	<section ng-switch-when="untouched">
+		<button ng-click="start.goToStartSession()" class="buttons startButtons">
 			<img class="startButtonImg" src="img/ssart.png">
 			<span class="startButtonText">Create a new session</span>
 		</button>
-		<button ng-click="joinSess()" class="buttons startButtons">
+		<button ng-click="start.goToJoinSession()" class="buttons startButtons">
 			<img class="startButtonImg" src="img/jsart.png">
 			<span class="startButtonText">Join an active session</span>
 		</button>
 	</section>
 	<!--Instructions and inputs for starting a new session-->
-	<section ng-show="startOptions">
+	<section ng-switch-when="startingSession">
 		<form name="codeEntry" novalidate>
-			<p class="startInstructions">{{sysMsg}}</p>
-			<div class="centerMe">
-				<input type="text" ng-model="sessID" class="startField" placeholder="e.g. 'Eng 101'" required autofocus>
-				<input type="submit" ng-disabled="!sessID" ng-click="saveSession()" class="buttons startSubmit">
+			<p class="startInstructions">{{start.sysMsg}}</p>
+			<div class="centeredFormElements">
+				<input type="text" ng-model="start.desiredSessID" class="startField" placeholder="e.g. 'Eng 101'" required autofocus>
+				<input type="submit" ng-disabled="!start.desiredSessID" ng-click="start.startSession()" class="buttons startSubmit">
 			</div>
 		</form>
 	</section>
 	<!--Instructions and inputs for joining an existing session-->
-	<section ng-show="joinOptions">
+	<section ng-switch-when="joiningSession">
 		<form name="codeEntry" novalidate>
-			<p class="startInstructions">{{sysMsg}}</p>
-			<div class="centerMe">
-				<input type="text" ng-model="entryID" class="startField" placeholder="Session code" required autofocus>
-				<input type="text" ng-model="userID" class="startField" placeholder="Username" required>
-				<input type="submit" ng-disabled="!entryID || !userID" ng-click="joinSession()" class="buttons startSubmit">
+			<p class="startInstructions">{{start.sysMsg}}</p>
+			<div class="centeredFormElements">
+				<input type="text" ng-model="start.entryID" class="startField" placeholder="Session code" required autofocus>
+				<input type="text" ng-model="start.desiredUserID" class="startField" placeholder="Username" required>
+				<input type="submit" ng-disabled="!start.entryID || !start.desiredUserID" ng-click="start.joinSession()" class="buttons startSubmit">
 			</div>
 		</form>
 	</section>

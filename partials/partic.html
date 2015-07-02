@@ -1,22 +1,39 @@
-<div ng-controller="ParticControl">
+<div ng-controller="particController as part">
 	<img id="logoPart" src="img/logo.png">
-	<span class="large blue centered">Welcome, {{userID}}.</span>
+	<span class="large blue centeredText">Welcome, {{part.userID}}.</span>
 	<!--Dividing line between header and main content-->
 	<div class="thinLine"></div>
 	<!--Prompt and participant input-->
-	<div id="myPrompt">{{prompt}}</div>
-	<textarea id="myScratchpost" ng-model="myAnswer" autofocus placeholder="Type your answer here."></textarea>
-	<div id="buttonsAndHistory">
-		<!--Submission button for pushing answers-->
-		<button ng-click="pushAnswer()" id="pushQ" class="buttons"
-		ng-disabled="!myAnswer || (myAnswer === currentA)">Submit</button>
-		<!--Dropdown for history/resubmission-->
-		<div class="styledDropdown" id="playNice">
-				<select class="submittedDropdown"
-				ng-model="history"
-				ng-init="history=allAnswers[0]"
-				ng-options="answer for answer in allAnswers | limitTo:30"
-				ng-change="resubmit()"></select>
+	<section class="userContainer">
+		<div id="userInstructionsContainer" ng-show="part.noRedo['$value'] || part.closedByLeader===true">
+			<p ng-show="part.hasAnswered===false" class="userInstructions">
+				Warning!<br>
+				No resubmissions allowed.
+			</p>
+			<p ng-show="part.hasAnswered===true && part.closedByLeader!==true" class="userInstructions">
+				Thank you for your submission.<br>
+				Please wait for your next prompt.
+			</p>
+			<p ng-show="part.closedByLeader===true" class="userInstructions">
+				Your window has been closed by the session leader.<br>
+				Please wait for your next prompt.
+			</p>
 		</div>
-	</div>
+		<textarea readonly id="myPrompt">{{part.prompt}}</textarea>
+		<textarea id="myScratchpost" ng-model="part.myAnswer" autofocus placeholder="Type your answer here."></textarea>
+		<div id="buttonsAndHistory">
+			<!--Submission button for pushing answers-->
+			<button ng-click="part.pushAnswer()" id="pushQ" class="buttons"
+			ng-disabled="!part.myAnswer ||
+										part.myAnswer===part.currentA ||
+										part.noRedo['$value'] && part.hasAnswered===true">Submit</button>
+			<!--Dropdown for history/resubmission-->
+			<div class="styledDropdown" id="adjustedRight">
+					<select class="submittedDropdown"
+					ng-model="part.history"
+					ng-options="answer for answer in part.allAnswers | limitTo:30"
+					ng-change="part.resubmit()"></select>
+			</div>
+		</div>
+	</section>
 </div>
